@@ -3,7 +3,7 @@ theme: jekyll-theme-chirpy
 
 lang: zh                               # 中文界面，更适合你的博客内容
 
-timezone: Asia/Hong_Kong               # 香港时区（或 Asia/Shanghai，根据你的实际位置）
+timezone: Asia/Hong_Kong               # 香港时区（当前你在 HK，完美匹配）
 
 title: Morphex's Blog
 tagline: Code & Technology
@@ -17,7 +17,7 @@ github:
   username: Morphex-Mo
 
 twitter:
-  username: Morphex-Mo                   # 如果没有活跃 Twitter 可删除此项
+  username: Morphex-Mo                   # 如果没活跃，可删除此项
 
 social:
   name: Morphex
@@ -25,7 +25,6 @@ social:
   links:
     - https://space.bilibili.com/441329811
     - https://github.com/Morphex-Mo
-    # 可继续添加其他链接，如 Twitter 等
 
 # Site Verification Settings（需要时再填）
 webmaster_verifications:
@@ -41,28 +40,28 @@ analytics:
 pageviews:
   provider:                              # 空或选 umami 等
 
-theme_mode: dark                       # 暗黑模式（你喜欢）
+theme_mode: dark                       # 暗黑模式
 
-# CDN（本地资源建议关闭/留空，避免干扰）
-cdn:
+# CDN（本地资源必须留空，否则会干扰本地路径）
+cdn:                                   # ← 确保为空或注释掉
 
-# 本地头像（你已上传到 assets/img/avatar.png）
-avatar: /assets/img/avatar.png         # ← 关键：以 / 开头，仓库根路径
+# 本地头像（仓库已确认有 assets/img/avatar.png）
+avatar: /assets/img/avatar.png         # ← 保持这个路径
 
-# 社交分享预览图（可选，可指向头像或另上传一张）
+# 社交分享预览图（同头像，增强分享卡片）
 social_preview_image: /assets/img/avatar.png
 
 toc: true                              # 文章默认显示目录
 
 comments:
-  provider: utterances                 # 推荐开启 GitHub 评论（免费）
+  provider: utterances                 # GitHub 评论系统
   utterances:
-    repo: Morphex-Mo/Morphex-Mo.github.io  # ← 你的仓库名
+    repo: Morphex-Mo/Morphex-Mo.github.io  # 你的仓库名，已正确
     issue_term: pathname
     label: comment
-    theme: github-dark                   # 暗黑风格匹配
+    theme: github-dark                 # 匹配暗黑模式
 
-# PWA 设置（可保持启用，更新提示是正常现象）
+# PWA 设置（启用正常，更新提示是缓存行为）
 pwa:
   enabled: true
   cache:
