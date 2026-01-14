@@ -4,7 +4,6 @@ date: 2025-01-01 10:00:00 +0800
 pin: true                          # ← 关键：置顶开关
 toc: false                         # 自我介绍不需要目录
 comments: false
-image: /assets/img/about-cover.jpg # 可选：上传一张封面图到 assets/img/
 ---
 
 **Tech Enthusiast & Computer Science Student** 👨‍💻
