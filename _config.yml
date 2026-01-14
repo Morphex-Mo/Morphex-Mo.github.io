@@ -1,29 +1,23 @@
 # The Site Configuration
-
-# Import the theme
 theme: jekyll-theme-chirpy
 
-# The language of the webpage
-lang: en
+lang: zh                               # 中文界面，更适合你的博客内容
 
-# Change to your timezone
-timezone: Asia/Shanghai
+timezone: Asia/Hong_Kong               # 香港时区（或 Asia/Shanghai，根据你的实际位置）
 
-# jekyll-seo-tag settings
 title: Morphex's Blog
-
 tagline: Code & Technology
-
 description: >-
-  Morphex的技术博客 | 分享编程技术、开发经验和学习笔记 | GitHub: @Morphex-Mo
+  Morphex 的技术博客 | 分享编程、开发经验、机器学习与学习笔记 | CS @ SUSTech
 
-url: "https://Morphex-Mo.github.io"
+url: "https://morphex-mo.github.io"    # 必须全小写，无多余斜杠
+baseurl: ""                            # 用户名.github.io 站点必须为空
 
 github:
   username: Morphex-Mo
 
 twitter:
-  username: Morphex-Mo
+  username: Morphex-Mo                   # 如果没有活跃 Twitter 可删除此项
 
 social:
   name: Morphex
@@ -31,89 +25,52 @@ social:
   links:
     - https://space.bilibili.com/441329811
     - https://github.com/Morphex-Mo
+    # 可继续添加其他链接，如 Twitter 等
 
-# Site Verification Settings
+# Site Verification Settings（需要时再填）
 webmaster_verifications:
   google:
   bing:
-  alexa:
-  yandex:
   baidu:
-  facebook:
 
-# Web Analytics Settings
+# Web Analytics Settings（可选，暂留空）
 analytics:
-  google:
-    id:
-  goatcounter:
-    id:
-  umami:
-    id:
-    domain:
-  matomo:
-    id:
-    domain:
-  cloudflare:
-    id:
-  fathom:
-    id:
+  google: { id: }
+  umami: { id: , domain: }
 
-# Page views settings
 pageviews:
-  provider:
+  provider:                              # 空或选 umami 等
 
-# Prefer color scheme setting
-theme_mode: dark
+theme_mode: dark                       # 暗黑模式（你喜欢）
 
-# The CDN endpoint for media resources
+# CDN（本地资源建议关闭/留空，避免干扰）
 cdn:
 
-# Use GitHub avatar
-avatar: https://github.com/Morphex-Mo.png
+# 本地头像（你已上传到 assets/img/avatar.png）
+avatar: /assets/img/avatar.png         # ← 关键：以 / 开头，仓库根路径
 
-# The URL of the site-wide social preview image used in SEO `og:image` meta tag.
-social_preview_image:
+# 社交分享预览图（可选，可指向头像或另上传一张）
+social_preview_image: /assets/img/avatar.png
 
-# boolean type, the global switch for TOC in posts.
-toc: true
+toc: true                              # 文章默认显示目录
 
 comments:
-  provider:
-  disqus:
-    shortname:
+  provider: utterances                 # 推荐开启 GitHub 评论（免费）
   utterances:
-    repo:
-    issue_term:
-  giscus:
-    repo:
-    repo_id:
-    category:
-    category_id:
-    mapping:
-    strict:
-    input_position:
-    lang:
-    reactions_enabled:
+    repo: Morphex-Mo/Morphex-Mo.github.io  # ← 你的仓库名
+    issue_term: pathname
+    label: comment
+    theme: github-dark                   # 暗黑风格匹配
 
-# Self-hosted static assets
-assets:
-  self_host:
-    enabled:
-    env:
-
+# PWA 设置（可保持启用，更新提示是正常现象）
 pwa:
   enabled: true
   cache:
     enabled: true
-    deny_paths:
 
 paginate: 10
 
-# The base URL of your site
-baseurl: ""
-
-# ------------ The following options are not recommended to be modified ------------------
-
+# ------------ 以下部分不建议修改 ------------------
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
