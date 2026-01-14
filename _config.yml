@@ -1,11 +1,19 @@
-# _config.yml
+# The Site Configuration
 
+# Import the theme
 theme: jekyll-theme-chirpy
+
+# The language of the webpage
 lang: en
+
+# Change to your timezone
 timezone: Asia/Shanghai
 
+# jekyll-seo-tag settings
 title: Morphex's Blog
+
 tagline: Code & Technology
+
 description: >-
   Morphex的技术博客 | 分享编程技术、开发经验和学习笔记 | GitHub: @Morphex-Mo
 
@@ -23,30 +31,89 @@ social:
   links:
     - https://space.bilibili.com/441329811
     - https://github.com/Morphex-Mo
-    # - https://twitter.com/YourTwitter  # 如有可添加
 
+# Site Verification Settings
 webmaster_verifications:
-  # 如需搜索引擎验证可填写
+  google:
+  bing:
+  alexa:
+  yandex:
+  baidu:
+  facebook:
 
+# Web Analytics Settings
 analytics:
-  # 可选：添加网站分析工具
+  google:
+    id:
+  goatcounter:
+    id:
+  umami:
+    id:
+    domain:
+  matomo:
+    id:
+    domain:
+  cloudflare:
+    id:
+  fathom:
+    id:
 
+# Page views settings
+pageviews:
+  provider:
+
+# Prefer color scheme setting
 theme_mode: dark
+
+# The CDN endpoint for media resources
+cdn:
+
+# Use GitHub avatar
+avatar: https://github.com/Morphex-Mo.png
+
+# The URL of the site-wide social preview image used in SEO `og:image` meta tag.
+social_preview_image:
+
+# boolean type, the global switch for TOC in posts.
 toc: true
 
 comments:
-  provider: # giscus  # 如需评论功能，启用此项
-  # 配置giscus参考：https://giscus.app
+  provider:
+  disqus:
+    shortname:
+  utterances:
+    repo:
+    issue_term:
+  giscus:
+    repo:
+    repo_id:
+    category:
+    category_id:
+    mapping:
+    strict:
+    input_position:
+    lang:
+    reactions_enabled:
+
+# Self-hosted static assets
+assets:
+  self_host:
+    enabled:
+    env:
 
 pwa:
   enabled: true
   cache:
     enabled: true
+    deny_paths:
 
 paginate: 10
+
+# The base URL of your site
 baseurl: ""
 
-# 以下为技术配置，一般不需修改
+# ------------ The following options are not recommended to be modified ------------------
+
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
