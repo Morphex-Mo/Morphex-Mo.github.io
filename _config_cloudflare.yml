@@ -1,0 +1,13 @@
+# Cloudflare Pages override config
+# Used together with _config.yml in Cloudflare build command.
+
+# Change this to your actual Cloudflare domain or custom domain.
+# Example: https://morphex.pages.dev
+url: "https://morphex.pages.dev"
+baseurl: ""
+
+# Keep cache behavior predictable during frequent updates.
+pwa:
+  enabled: false
+  cache:
+    enabled: false

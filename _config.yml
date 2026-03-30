@@ -63,9 +63,9 @@ comments:
 
 # PWA 设置（启用正常，更新提示是缓存行为）
 pwa:
-  enabled: true
+  enabled: false
   cache:
-    enabled: true
+    enabled: false
 
 paginate: 10
 
