@@ -9,12 +9,12 @@ comments: false
 ## 🌐 Multi-language | 多语言 | 多言語
 
 - [English](#english)
-- [中文](#中文)
-- [日本語](#日本語)
+- [中文](#chinese)
+- [日本語](#japanese)
 
 ---
 
-## <a id="english"></a>English
+## <span id="english"></span>English
 
 ### Tech Enthusiast & Computer Science Student 👨‍💻
 
@@ -76,7 +76,7 @@ comments: false
 
 ---
 
-## <a id="中文"></a>中文
+## <span id="chinese"></span>中文
 
 ### 技术爱好者 & 计算机科学学生 👨‍💻
 
@@ -138,7 +138,7 @@ comments: false
 
 ---
 
-## <a id="日本語"></a>日本語
+## <span id="japanese"></span>日本語
 
 ### 技術愛好者 & コンピュータサイエンス学生 👨‍💻
 
