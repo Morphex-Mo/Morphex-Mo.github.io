@@ -1,6 +1,6 @@
 ---
 title: About Me | Morphex
-date: 2025-01-01 10:00:00 +0800
+date: 2026-01-01 10:00:00 +0800
 pin: true                          # ← 关键：置顶开关
 toc: false                         # 自我介绍不需要目录
 comments: false
