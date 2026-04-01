@@ -1,6 +1,6 @@
 ---
-title: 日推歌单 Vol.02｜loong《spiral》
-date: 2026-04-01 20:15:00 +0800
+title: 日推歌单 Vol.01｜loong《spiral》
+date: 2026-03-31 20:15:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
 ---
