@@ -40,6 +40,29 @@ tags: [日推歌单, 动漫音乐, ACG]
 > 说明：歌词会随播放进度自动高亮并滚动，点击任意行可跳转到对应时间。
 
 <style>
+  #lrc-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 10px;
+  }
+
+  #lrc-tools button {
+    border: 1px solid var(--btn-border-color);
+    background: var(--button-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+
+  #lrc-tools .offset-label {
+    color: var(--text-muted-color);
+    font-size: 0.92em;
+    padding: 0 2px;
+  }
+
   #lrc-panel {
     max-height: 420px;
     overflow-y: auto;
@@ -79,15 +102,39 @@ tags: [日推歌单, 动漫音乐, ACG]
   <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 
+<div id="lrc-tools">
+  <button id="follow-toggle" type="button">歌词跟随：开</button>
+  <button class="offset-step" type="button" data-step="-0.3">-0.3s</button>
+  <span id="offset-label" class="offset-label">同步偏移：0.0s</span>
+  <button class="offset-step" type="button" data-step="0.3">+0.3s</button>
+  <button id="offset-reset" type="button">重置</button>
+</div>
+
 <script>
   (function () {
     const player = document.getElementById('daily-player');
     const now = document.getElementById('now-playing');
     const buttons = document.querySelectorAll('#daily-playlist .song-play');
     const lrcPanel = document.getElementById('lrc-panel');
+    const followToggle = document.getElementById('follow-toggle');
+    const offsetLabel = document.getElementById('offset-label');
+    const offsetButtons = document.querySelectorAll('.offset-step');
+    const offsetReset = document.getElementById('offset-reset');
     const lrcUrl = '/assets/lyrics/midnight-reflection.lrc';
     let lyricBlocks = [];
     let activeIndex = -1;
+    let autoFollow = true;
+    let lyricOffset = 0;
+
+    function refreshControlText() {
+      if (followToggle) {
+        followToggle.textContent = '歌词跟随：' + (autoFollow ? '开' : '关');
+      }
+      if (offsetLabel) {
+        const prefix = lyricOffset >= 0 ? '+' : '';
+        offsetLabel.textContent = '同步偏移：' + prefix + lyricOffset.toFixed(1) + 's';
+      }
+    }
 
     function parseLrc(raw) {
       const rows = raw.split(/\r?\n/);
@@ -102,6 +149,9 @@ tags: [日推歌单, 动漫音乐, ACG]
         const second = Number(match[2]);
         const text = (match[3] || '').trim();
         if (!text) return;
+
+        // Filter metadata lines that are not intended for live lyric sync.
+        if (text.startsWith('词：') || text.startsWith('曲：') || text.includes('著作权')) return;
 
         entries.push({
           time: minute * 60 + second,
@@ -159,9 +209,11 @@ tags: [日推歌单, 动漫音乐, ACG]
     function updateActiveLyric(currentTime) {
       if (!lyricBlocks.length || !lrcPanel) return;
 
+      const syncedTime = Math.max(0, currentTime + lyricOffset);
+
       let idx = -1;
       for (let i = 0; i < lyricBlocks.length; i++) {
-        if (currentTime >= lyricBlocks[i].time) {
+        if (syncedTime >= lyricBlocks[i].time) {
           idx = i;
         } else {
           break;
@@ -176,7 +228,9 @@ tags: [日推歌单, 动漫音乐, ACG]
       const next = lrcPanel.querySelector('.lrc-item[data-idx="' + idx + '"]');
       if (next) {
         next.classList.add('active');
-        next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        if (autoFollow) {
+          next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
       }
 
       activeIndex = idx;
@@ -231,6 +285,38 @@ tags: [日推歌单, 动漫音乐, ACG]
         updateActiveLyric(player.currentTime);
       });
     }
+
+    if (followToggle) {
+      followToggle.addEventListener('click', function () {
+        autoFollow = !autoFollow;
+        refreshControlText();
+      });
+    }
+
+    offsetButtons.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const step = Number(this.getAttribute('data-step') || '0');
+        if (!Number.isFinite(step)) return;
+
+        lyricOffset = Math.max(-3, Math.min(3, Number((lyricOffset + step).toFixed(1))));
+        refreshControlText();
+        if (player) {
+          updateActiveLyric(player.currentTime);
+        }
+      });
+    });
+
+    if (offsetReset) {
+      offsetReset.addEventListener('click', function () {
+        lyricOffset = 0;
+        refreshControlText();
+        if (player) {
+          updateActiveLyric(player.currentTime);
+        }
+      });
+    }
+
+    refreshControlText();
 
     loadLrc();
   })();
