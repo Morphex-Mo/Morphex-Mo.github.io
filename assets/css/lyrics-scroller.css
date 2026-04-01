@@ -10,6 +10,10 @@
   font-family: 'Source Sans Pro', sans-serif;
   /* 防止滚动事件冒泡 */
   overscroll-behavior: contain;
+  /* 禁用页面滚动时容器的过度滚动效果 */
+  -webkit-overflow-scrolling: touch;
+  /* 隔离这个元素的滚动效果 */
+  position: relative;
 }
 
 /* 歌词行样式 */

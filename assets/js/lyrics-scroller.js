@@ -23,10 +23,33 @@ class LyricsScroller {
     // 防止容器内的滚动冒泡到页面
     const container = document.querySelector(this.container);
     if (container) {
+      // 处理鼠标滚轮事件
       container.addEventListener('wheel', (e) => {
+        // 允许容器内部滚动，防止冒泡到页面
+        const canScrollUp = container.scrollTop > 0;
+        const canScrollDown = container.scrollTop < (container.scrollHeight - container.clientHeight);
+        
+        if ((e.deltaY < 0 && !canScrollUp) || (e.deltaY > 0 && !canScrollDown)) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      
+      // 防止触摸滚动冒泡
+      container.addEventListener('touchmove', (e) => {
         e.stopPropagation();
-      }, { passive: true });
+      }, { passive: false });
     }
+    
+    // 防止键盘滚动（Space、Page Down等）影响页面
+    document.addEventListener('keydown', (e) => {
+      if (document.activeElement === document.querySelector(this.container) || 
+          document.querySelector(this.container).contains(document.activeElement)) {
+        if (['ArrowUp', 'ArrowDown', ' ', 'PageUp', 'PageDown'].includes(e.key)) {
+          e.preventDefault();
+          return false;
+        }
+      }
+    }, true);
   }
 
   // 解析 LRC 格式：[mm:ss.xxx]歌词文本
