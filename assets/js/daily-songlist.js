@@ -115,14 +115,8 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        // 让活跃歌词显示在面板顶部往下 1/4 处（留一些上文歌词）
-        const elementOffsetTop = next.offsetTop;
-        const panelHeight = lrcPanel.clientHeight;
-        const targetScrollTop = elementOffsetTop - (panelHeight / 4);
-        const maxScroll = lrcPanel.scrollHeight - panelHeight;
-        const safeScrollTop = Math.max(0, Math.min(targetScrollTop, maxScroll));
-        
-        lrcPanel.scrollTo({ top: safeScrollTop, behavior: 'auto' });
+        // 让活跃歌词滚动到面板中心显示
+        next.scrollIntoView({ behavior: 'auto', block: 'center' });
       }
     }
 
