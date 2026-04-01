@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.01｜如果相距很远，那我会开着高达来见你
+title: 日推歌单 Vol.01｜米津玄师《Plazma》
 date: 2026-04-01 19:58:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,35 +7,35 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 #完成推荐语
 
-今天想推荐的这首，是我私心很重的一曲。它有高达系作品一贯的辽阔感，也有米津玄师嗓音里那种克制而锋利的温度。前奏像夜空里缓慢推进的推进器，副歌却忽然把情绪抬到失重边缘，像人在漫长航道中，终于看见彼岸的灯。
+今天想推荐的，是米津玄师为《机动战士高达 GQuuuuuuX》演唱的主题曲《Plazma》。这首歌有一种非常现代的推进感，合成器像粒子束一样切开夜色，鼓点紧凑而克制，情绪却在层层叠加中不断抬升。
 
-如果说很多歌是在讲相遇，那么这首更像是在讲“抵达”：哪怕相隔再远，也会穿过噪声、穿过黑暗、穿过各自沉默的轨道，去见想见的人。它不是喧哗的热血，而是带着金属光泽的温柔。
+米津玄师的声线在这首歌里依旧辨识度极高，冷静与炽热并存，既有高达作品里“迈向未知”的孤独，也有“即使遍体鳞伤也要向前”的决绝。它不是单纯燃向，而是一种把理性与浪漫焊接在一起的太空诗意。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
   <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-    <button class="song-play" data-src="/assets/media/midnight-reflection.mp3" data-title="ミッドナイト・リフレクション" type="button">开始</button>
-    <span>ミッドナイト・リフレクション</span>
+    <button class="song-play" data-src="/assets/media/plazma.mp3" data-title="Plazma" type="button">开始</button>
+    <span>Plazma</span>
   </li>
 </ul>
 
 <div style="margin-top: 14px;">
   <audio id="daily-player" controls preload="metadata" style="width:100%;">
-    <source src="/assets/media/midnight-reflection.mp3" type="audio/mpeg">
+    <source src="/assets/media/plazma.mp3" type="audio/mpeg">
     你的浏览器不支持 audio 标签
   </audio>
-  <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: ミッドナイト・リフレクション</p>
+  <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: Plazma</p>
 </div>
 
 <details style="margin-top:14px;">
   <summary>查看歌词文件（LRC）</summary>
-  <p><a href="/assets/lyrics/midnight-reflection.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+  <p><a href="/assets/lyrics/plazma.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（中日双语 · 同步滚动）
 
-> 曲名：ミッドナイト・リフレクション  
+> 曲名：Plazma  
 > 演唱：米津玄师  
 > 说明：歌词会随播放进度自动高亮并滚动，点击任意行可跳转到对应时间。
 
@@ -98,7 +98,7 @@ tags: [日推歌单, 动漫音乐, ACG]
   }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/midnight-reflection.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/plazma.lrc">
   <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 

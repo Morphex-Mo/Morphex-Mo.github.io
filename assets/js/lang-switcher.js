@@ -73,12 +73,6 @@
     translateUi(lang);
   }
 
-  function openDeepL(lang) {
-    const to = lang === 'ja' ? 'ja' : lang === 'en' ? 'en' : 'zh';
-    const url = 'https://www.deepl.com/translator#zh/' + to + '/' + encodeURIComponent(window.location.href);
-    window.open(url, '_blank', 'noopener');
-  }
-
   function mountLangSwitcher() {
     if (document.getElementById('lang-switcher')) {
       return;
@@ -92,8 +86,6 @@
       '<button type="button" class="lang-btn" data-lang="zh">中文</button>' +
       '<button type="button" class="lang-btn" data-lang="en">English</button>' +
       '<button type="button" class="lang-btn" data-lang="ja">日本語</button>' +
-      '<button type="button" class="lang-btn" data-lang="deepl-en">DeepL 英文</button>' +
-      '<button type="button" class="lang-btn" data-lang="deepl-ja">DeepL 日文</button>' +
       '</div>';
 
     document.body.appendChild(root);
@@ -119,18 +111,6 @@
 
       const key = target.getAttribute('data-lang');
       if (!key) {
-        return;
-      }
-
-      if (key === 'deepl-en') {
-        openDeepL('en');
-        root.classList.remove('open');
-        return;
-      }
-
-      if (key === 'deepl-ja') {
-        openDeepL('ja');
-        root.classList.remove('open');
         return;
       }
 
