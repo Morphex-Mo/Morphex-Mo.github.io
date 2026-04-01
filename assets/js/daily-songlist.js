@@ -115,15 +115,14 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        // 直接计算歌词元素在面板中的位置，让它在面板竖直中心显示
+        // 让活跃歌词显示在面板顶部往下 1/4 处（留一些上文歌词）
         const elementOffsetTop = next.offsetTop;
-        const elementHeight = next.offsetHeight;
         const panelHeight = lrcPanel.clientHeight;
-        const centeredScrollTop = elementOffsetTop - (panelHeight / 2) + (elementHeight / 2);
+        const targetScrollTop = elementOffsetTop - (panelHeight / 4);
         const maxScroll = lrcPanel.scrollHeight - panelHeight;
-        const targetScroll = Math.max(0, Math.min(centeredScrollTop, maxScroll));
+        const safeScrollTop = Math.max(0, Math.min(targetScrollTop, maxScroll));
         
-        lrcPanel.scrollTo({ top: targetScroll, behavior: 'auto' });
+        lrcPanel.scrollTo({ top: safeScrollTop, behavior: 'auto' });
       }
     }
 
