@@ -115,17 +115,15 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        const maxTop = Math.max(0, lrcPanel.scrollHeight - lrcPanel.clientHeight);
-        const progress = lyricBlocks.length > 1 ? idx / (lyricBlocks.length - 1) : 0;
-        const targetTop = maxTop * progress;
-        lrcPanel.scrollTo({ top: targetTop, behavior: 'auto' });
-
-        // 同步页面滚动条：让活跃歌词在屏幕中心
-        const rect = next.getBoundingClientRect();
-        const elementCenterY = rect.top + rect.height / 2;
-        const viewportCenterY = window.innerHeight / 2;
-        const scrollOffset = elementCenterY - viewportCenterY;
-        window.scrollBy({ top: scrollOffset, behavior: 'auto' });
+        // 直接计算歌词元素在面板中的位置，让它在面板竖直中心显示
+        const elementOffsetTop = next.offsetTop;
+        const elementHeight = next.offsetHeight;
+        const panelHeight = lrcPanel.clientHeight;
+        const centeredScrollTop = elementOffsetTop - (panelHeight / 2) + (elementHeight / 2);
+        const maxScroll = lrcPanel.scrollHeight - panelHeight;
+        const targetScroll = Math.max(0, Math.min(centeredScrollTop, maxScroll));
+        
+        lrcPanel.scrollTo({ top: targetScroll, behavior: 'auto' });
       }
     }
 
