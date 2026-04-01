@@ -1,0 +1,71 @@
+#skin-switcher {
+  position: fixed;
+  right: 1rem;
+  bottom: 8rem;
+  z-index: 1000;
+}
+
+#skin-switcher .skin-toggle {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--btn-border-color, #d0d0d0);
+  background: var(--button-bg, #ffffff);
+  color: var(--text-color, #222222);
+  box-shadow: var(--card-shadow, 0 4px 12px rgba(0, 0, 0, 0.15));
+  cursor: pointer;
+}
+
+#skin-switcher .skin-panel {
+  margin-top: 0.5rem;
+  width: 12rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--main-border-color, #e5e5e5);
+  background: var(--card-bg, #ffffff);
+  box-shadow: var(--card-shadow, 0 8px 22px rgba(0, 0, 0, 0.2));
+  display: none;
+}
+
+#skin-switcher.open .skin-panel {
+  display: block;
+}
+
+#skin-switcher .skin-btn {
+  width: 100%;
+  margin: 0.2rem 0;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--btn-border-color, #d0d0d0);
+  background: var(--button-bg, #ffffff);
+  color: var(--text-color, #222222);
+  text-align: left;
+  cursor: pointer;
+}
+
+#skin-switcher .skin-btn:hover {
+  background: var(--sidebar-hover-bg, rgba(120, 120, 120, 0.12));
+}
+
+html[data-user-skin='sepia'] {
+  --main-bg: #f7f1e6;
+  --card-bg: #fdf7eb;
+  --text-color: #4e3f2b;
+  --heading-color: #3a2b1a;
+  --link-color: #8a4f2b;
+  --sidebar-bg: #efe2cd;
+  --sidebar-border-color: #e2d1b8;
+  --sidebar-muted-color: #6a533c;
+  --sidebar-active-color: #3b2c1c;
+  --topbar-bg: rgba(247, 241, 230, 0.85);
+  --main-border-color: #e6d6bf;
+  --btn-border-color: #d8c3a6;
+  --button-bg: #fff9ef;
+}
+
+@media (max-width: 768px) {
+  #skin-switcher {
+    right: 0.75rem;
+    bottom: 7rem;
+  }
+}

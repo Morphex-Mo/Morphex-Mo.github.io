@@ -10,6 +10,23 @@
       return path.length > 1 ? path.replace(/\/+$/, '') : path;
     }
 
+    function normalizeIssueTerm(text) {
+      if (!text) return '';
+      let value = String(text).trim();
+
+      try {
+        value = decodeURIComponent(value);
+      } catch (error) {
+        // Keep original value if decoding fails.
+      }
+
+      value = value.replace(/^https?:\/\/[^/]+/i, '');
+      value = value.replace(/^\/+/, '');
+      value = value.replace(/\/+$/, '');
+
+      return value.toLowerCase();
+    }
+
     function ensureStatNodes() {
       const metaRight = document.querySelector('.post-meta .d-flex.justify-content-between > div');
       if (!metaRight) {
@@ -69,11 +86,21 @@
       const owner = parts[0];
       const repoName = parts[1];
       const postPath = normalizePath(window.location.pathname);
+      const postPathNoLead = postPath.replace(/^\/+/, '');
+      const postPathNoLeadNoTrail = postPathNoLead.replace(/\/+$/, '');
+
+      const pathCandidates = new Set([
+        normalizeIssueTerm(postPath),
+        normalizeIssueTerm(postPathNoLead),
+        normalizeIssueTerm(postPathNoLeadNoTrail),
+        normalizeIssueTerm(window.location.href),
+        normalizeIssueTerm(window.location.origin + postPath)
+      ]);
 
       commentsNode.textContent = '...';
 
       try {
-        const url = 'https://api.github.com/repos/' + owner + '/' + repoName + '/issues?labels=comment&state=all&per_page=100';
+        const url = 'https://api.github.com/repos/' + owner + '/' + repoName + '/issues?state=all&per_page=100';
         const response = await fetch(url, {
           headers: {
             Accept: 'application/vnd.github+json'
@@ -87,8 +114,8 @@
 
         const issues = await response.json();
         const target = issues.find((issue) => {
-          const title = normalizePath(decodeURIComponent(issue.title || ''));
-          return title === postPath || title === postPath + '/';
+          const issueTerm = normalizeIssueTerm(issue.title || '');
+          return pathCandidates.has(issueTerm);
         });
 
         commentsNode.textContent = target ? String(target.comments || 0) : '0';
