@@ -66,9 +66,10 @@ tags: [日推歌单, 动漫音乐, ACG]
     overflow-y: auto;
     border: 1px solid var(--main-border-color);
     border-radius: 12px;
-    padding: 10px 8px;
+    padding: 10px 14px 10px 8px;
     background: var(--card-bg);
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    scrollbar-gutter: stable;
   }
 
   .lrc-item {

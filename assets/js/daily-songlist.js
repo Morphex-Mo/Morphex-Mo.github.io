@@ -65,6 +65,9 @@
     var follow = true;
     var offset = 0;
 
+    // Use instant scrolling for timeupdate-driven sync to avoid lagging behind.
+    panel.style.scrollBehavior = 'auto';
+
     fetch(lrcUrl)
       .then(function (r) {
         if (!r.ok) throw new Error('Load LRC failed');
@@ -104,9 +107,23 @@
       cur.classList.add('active');
 
       if (follow) {
-        var target = cur.offsetTop - panel.clientHeight / 2 + cur.clientHeight / 2;
-        panel.scrollTop = Math.max(0, target);
+        centerLine(cur);
       }
+    }
+
+    function centerLine(el) {
+      var panelRect = panel.getBoundingClientRect();
+      var elRect = el.getBoundingClientRect();
+
+      // Calculate target scroll by visual centers to avoid offset/padding drift.
+      var delta = (elRect.top + elRect.height / 2) - (panelRect.top + panelRect.height / 2);
+      var target = panel.scrollTop + delta;
+
+      var maxScroll = panel.scrollHeight - panel.clientHeight;
+      if (target < 0) target = 0;
+      if (target > maxScroll) target = maxScroll;
+
+      panel.scrollTop = target;
     }
 
     function locate(t) {
@@ -141,6 +158,9 @@
       var t = parseFloat(el.dataset.time || '0');
       if (!Number.isNaN(t)) {
         player.currentTime = Math.max(0, t - offset);
+        if (follow) {
+          centerLine(el);
+        }
       }
     });
 
@@ -148,6 +168,10 @@
       followBtn.addEventListener('click', function () {
         follow = !follow;
         followBtn.textContent = '歌词跟随：' + (follow ? '开' : '关');
+        if (follow && active >= 0) {
+          var cur = panel.querySelector('.lrc-item[data-index="' + active + '"]');
+          if (cur) centerLine(cur);
+        }
       });
     }
 

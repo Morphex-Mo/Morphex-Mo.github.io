@@ -67,9 +67,10 @@ loong的主唱在这首歌里演绎的不是绝望后的奋起，而是更温暖
     overflow-y: auto;
     border: 1px solid var(--main-border-color);
     border-radius: 12px;
-    padding: 10px 8px;
+    padding: 10px 14px 10px 8px;
     background: var(--card-bg);
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    scrollbar-gutter: stable;
   }
 
   .lrc-item {
