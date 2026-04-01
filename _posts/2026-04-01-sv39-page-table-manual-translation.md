@@ -1,6 +1,6 @@
 ---
 title: Sv39 手工页表翻译做题方法（含 satp+hexdump 例题）
-date: 2026-04-01 20:00:00 +0800
+date: 2026-04-01 19:00:00 +0800
 categories: [OS]
 tags: [RISC-V, Sv39, 页表, 地址翻译]
 ---
