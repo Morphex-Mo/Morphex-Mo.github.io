@@ -5,8 +5,6 @@ categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
 ---
 
-#完成推荐语
-
 今天想推荐的，是米津玄师为《机动战士高达 GQuuuuuuX》演唱的主题曲《Plazma》。这首歌有一种非常现代的推进感，合成器像粒子束一样切开夜色，鼓点紧凑而克制，情绪却在层层叠加中不断抬升。
 
 米津玄师的声线在这首歌里依旧辨识度极高，冷静与炽热并存，既有高达作品里“迈向未知”的孤独，也有“即使遍体鳞伤也要向前”的决绝。它不是单纯燃向，而是一种把理性与浪漫焊接在一起的太空诗意。
@@ -15,7 +13,7 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
   <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-    <button class="song-play" data-src="/assets/media/plazma.mp3" data-title="Plazma" type="button">开始</button>
+    <button class="song-play" data-src="/assets/media/plazma.mp3" data-title="Plazma" type="button" aria-label="播放 Plazma" title="播放">▶</button>
     <span>Plazma</span>
   </li>
 </ul>
@@ -66,6 +64,7 @@ tags: [日推歌单, 动漫音乐, ACG]
   #lrc-panel {
     max-height: 420px;
     overflow-y: auto;
+    overscroll-behavior: contain;
     border: 1px solid var(--main-border-color);
     border-radius: 12px;
     padding: 10px 8px;
