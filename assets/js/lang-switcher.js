@@ -3,60 +3,38 @@
   const DEFAULT_LANG = 'zh';
   const MAPPING = { zh: 'zh-CN', en: 'en', ja: 'ja' };
 
-  // Local dictionary for common site UI text. No external translation service.
-  const DICT = {
-    en: {
-      '首页': 'Home',
-      '分类': 'Categories',
-      '标签': 'Tags',
-      '归档': 'Archives',
-      '关于': 'About',
-      '搜索': 'Search',
-      '最近更新': 'Recently Updated',
-      '热门标签': 'Trending Tags',
-      '上一篇': 'Previous',
-      '下一篇': 'Next',
-      '评论': 'Comments',
-      '浏览': 'Views',
-      '开始': 'Play',
-      '切换皮肤': 'Theme',
-      '切换语言': 'Language',
-      '日光（白色）': 'Daylight (Light)',
-      '夜晚（黑色）': 'Night (Dark)',
-      '暖棕（护眼）': 'Sepia (Eye Comfort)',
-      '跟随系统': 'Follow System'
-    },
-    ja: {
-      '首页': 'ホーム',
-      '分类': 'カテゴリ',
-      '标签': 'タグ',
-      '归档': 'アーカイブ',
-      '关于': 'プロフィール',
-      '搜索': '検索',
-      '最近更新': '最近の更新',
-      '热门标签': '人気タグ',
-      '上一篇': '前へ',
-      '下一篇': '次へ',
-      '评论': 'コメント',
-      '浏览': '閲覧',
-      '开始': '再生',
-      '切换皮肤': 'テーマ',
-      '切换语言': '言語',
-      '日光（白色）': '日光（ライト）',
-      '夜晚（黑色）': '夜（ダーク）',
-      '暖棕（护眼）': 'セピア（目に優しい）',
-      '跟随系统': 'システムに従う'
-    }
+  // Explicit selector-based i18n map for stable runtime switching.
+  const UI_TEXT = {
+    nav_home: { zh: '首页', en: 'Home', ja: 'ホーム' },
+    nav_categories: { zh: '分类', en: 'Categories', ja: 'カテゴリ' },
+    nav_tags: { zh: '标签', en: 'Tags', ja: 'タグ' },
+    nav_archives: { zh: '归档', en: 'Archives', ja: 'アーカイブ' },
+    nav_about: { zh: '关于', en: 'About', ja: 'プロフィール' },
+    panel_lastmod: { zh: '最近更新', en: 'Recently Updated', ja: '最近の更新' },
+    panel_trending: { zh: '热门标签', en: 'Trending Tags', ja: '人気タグ' },
+    skin_light: { zh: '日光（白色）', en: 'Daylight (Light)', ja: '日光（ライト）' },
+    skin_dark: { zh: '夜晚（黑色）', en: 'Night (Dark)', ja: '夜（ダーク）' },
+    skin_sepia: { zh: '暖棕（护眼）', en: 'Sepia (Eye Comfort)', ja: 'セピア（目に優しい）' },
+    skin_auto: { zh: '跟随系统', en: 'Follow System', ja: 'システムに従う' },
+    lang_toggle: { zh: 'A文', en: 'Lang', ja: '言語' },
+    view_label: { zh: '浏览', en: 'Views', ja: '閲覧' },
+    comment_label: { zh: '评论', en: 'Comments', ja: 'コメント' },
+    play_label: { zh: '开始', en: 'Play', ja: '再生' }
   };
 
-  const TARGET_SELECTORS = [
-    '#sidebar .nav-link span',
-    '#panel-wrapper .panel-heading',
-    '#access-lastmod a',
-    '.post-meta span',
-    '#skin-switcher .skin-btn',
-    '#skin-switcher .skin-toggle',
-    '#lang-switcher .lang-toggle'
+  const BINDINGS = [
+    { selector: '#sidebar a[href="/"] span', key: 'nav_home' },
+    { selector: '#sidebar a[href$="/categories/"] span', key: 'nav_categories' },
+    { selector: '#sidebar a[href$="/tags/"] span', key: 'nav_tags' },
+    { selector: '#sidebar a[href$="/archives/"] span', key: 'nav_archives' },
+    { selector: '#sidebar a[href$="/about/"] span', key: 'nav_about' },
+    { selector: '#access-lastmod .panel-heading', key: 'panel_lastmod' },
+    { selector: '#panel-wrapper section:nth-of-type(2) .panel-heading', key: 'panel_trending' },
+    { selector: '#skin-switcher .skin-btn[data-action="light"]', key: 'skin_light' },
+    { selector: '#skin-switcher .skin-btn[data-action="dark"]', key: 'skin_dark' },
+    { selector: '#skin-switcher .skin-btn[data-action="sepia"]', key: 'skin_sepia' },
+    { selector: '#skin-switcher .skin-btn[data-action="auto"]', key: 'skin_auto' },
+    { selector: '#lang-switcher .lang-toggle', key: 'lang_toggle' }
   ];
 
   function getCurrentLangKey() {
@@ -65,43 +43,25 @@
     return DEFAULT_LANG;
   }
 
-  function translateElementText(el, lang) {
-    const dict = DICT[lang];
-    if (!el) return;
-
-    if (!el.dataset.i18nBase) {
-      el.dataset.i18nBase = (el.textContent || '').trim();
-    }
-
-    const base = el.dataset.i18nBase;
-    if (!base) return;
-
-    if (lang === 'zh') {
-      el.textContent = base;
-      return;
-    }
-
-    if (dict && dict[base]) {
-      el.textContent = dict[base];
-    }
+  function setTextIfExists(selector, text) {
+    if (!text) return;
+    document.querySelectorAll(selector).forEach((el) => {
+      el.textContent = text;
+    });
   }
 
   function translateUi(lang) {
-    TARGET_SELECTORS.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((el) => translateElementText(el, lang));
+    BINDINGS.forEach((item) => {
+      const dict = UI_TEXT[item.key] || {};
+      setTextIfExists(item.selector, dict[lang] || dict.zh);
     });
 
-    // Translate sidebar title hints if present.
-    const langToggle = document.querySelector('#lang-switcher .lang-toggle');
-    if (langToggle) {
-      const labels = { zh: 'A文', en: 'Lang', ja: '言語' };
-      langToggle.textContent = labels[lang] || labels.zh;
-    }
-
-    const skinToggle = document.querySelector('#skin-switcher .skin-toggle');
-    if (skinToggle) {
-      skinToggle.setAttribute('title', lang === 'en' ? 'Theme' : lang === 'ja' ? 'テーマ' : '切换皮肤');
-    }
+    // Dynamic labels injected by scripts.
+    setTextIfExists('#local-pageviews', '');
+    setTextIfExists('#utterances-comments-count', '');
+    setTextIfExists('#daily-playlist .song-play', UI_TEXT.play_label[lang] || UI_TEXT.play_label.zh);
+    setTextIfExists('#pageviews + *', UI_TEXT.view_label[lang] || UI_TEXT.view_label.zh);
+    setTextIfExists('#utterances-comments-count + *', UI_TEXT.comment_label[lang] || UI_TEXT.comment_label.zh);
 
     document.documentElement.setAttribute('lang', MAPPING[lang] || MAPPING.zh);
   }
@@ -190,10 +150,12 @@
       }
     });
 
-    // Re-apply once for delayed-rendered UI bits instead of continuous observation.
-    setTimeout(function () {
-      translateUi(getCurrentLangKey());
-    }, 600);
+    // Re-apply a few times for delayed-rendered UI bits (cheap and deterministic).
+    [300, 1000, 1800].forEach((delay) => {
+      setTimeout(function () {
+        translateUi(getCurrentLangKey());
+      }, delay);
+    });
   }
 
   if (document.readyState === 'loading') {
