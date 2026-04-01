@@ -115,20 +115,8 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        // 第一步：让面板内部滚动显示这条歌词
-        const elementOffsetTop = next.offsetTop;
-        const elementHeight = next.offsetHeight;
-        const panelHeight = lrcPanel.clientHeight;
-        const panelCenterScrollTop = elementOffsetTop - (panelHeight / 2) + (elementHeight / 2);
-        const maxPanelScroll = lrcPanel.scrollHeight - panelHeight;
-        lrcPanel.scrollTop = Math.max(0, Math.min(panelCenterScrollTop, maxPanelScroll));
-
-        // 第二步：让整个页面滚动，把这个歌词送到屏幕中心
-        const rect = next.getBoundingClientRect();
-        const elementCenterY = rect.top + rect.height / 2;
-        const screenCenterY = window.innerHeight / 2;
-        const pageScrollAdjust = window.scrollY + (elementCenterY - screenCenterY);
-        window.scrollTo({ top: pageScrollAdjust, behavior: 'auto' });
+        // 使用原生 scrollIntoView 让高亮歌词在窗口中心显示
+        next.scrollIntoView({ behavior: 'auto', block: 'center' });
       }
     }
 
