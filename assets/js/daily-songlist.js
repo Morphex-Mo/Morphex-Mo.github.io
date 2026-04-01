@@ -115,12 +115,10 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        const nextTop = next.offsetTop;
-        const nextHeight = next.offsetHeight;
-        const targetTop = nextTop - lrcPanel.clientHeight / 2 + nextHeight / 2;
         const maxTop = Math.max(0, lrcPanel.scrollHeight - lrcPanel.clientHeight);
-        const clampedTop = Math.max(0, Math.min(maxTop, targetTop));
-        lrcPanel.scrollTo({ top: clampedTop, behavior: 'smooth' });
+        const progress = lyricBlocks.length > 1 ? idx / (lyricBlocks.length - 1) : 0;
+        const targetTop = maxTop * progress;
+        lrcPanel.scrollTo({ top: targetTop, behavior: 'auto' });
       }
     }
 
