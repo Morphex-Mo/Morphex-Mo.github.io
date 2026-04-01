@@ -2,6 +2,8 @@
   const LANG_STORAGE = 'blog:lang';
   const DEFAULT_LANG = 'zh';
   const MAPPING = { zh: 'zh-CN', en: 'en', ja: 'ja' };
+  const DYNAMIC_TARGETS = { en: 'en', ja: 'ja' };
+  const TRANSLATE_API = 'https://api.mymemory.translated.net/get';
 
   // Explicit selector-based i18n map for stable runtime switching.
   const UI_TEXT = {
@@ -50,6 +52,108 @@
     });
   }
 
+  function getTranslatableNodes() {
+    const selector = [
+      'main .content p',
+      'main .content li',
+      'main .content h1',
+      'main .content h2',
+      'main .content h3',
+      'main .content h4',
+      'main .content h5',
+      'main .content blockquote',
+      'main .content summary'
+    ].join(',');
+
+    return Array.from(document.querySelectorAll(selector)).filter((el) => {
+      if (!(el instanceof HTMLElement)) return false;
+      if (el.closest('#lrc-panel')) return false;
+      if (el.closest('pre,code,script,style')) return false;
+      const text = (el.textContent || '').trim();
+      return text.length > 1;
+    });
+  }
+
+  function rememberOriginal(el) {
+    if (!el.dataset.i18nOriginal) {
+      el.dataset.i18nOriginal = (el.textContent || '').trim();
+    }
+    return el.dataset.i18nOriginal || '';
+  }
+
+  function restoreOriginalText() {
+    getTranslatableNodes().forEach((el) => {
+      if (el.dataset.i18nOriginal) {
+        el.textContent = el.dataset.i18nOriginal;
+      }
+    });
+  }
+
+  function cacheKey(lang, text) {
+    return 'mt:' + lang + ':' + text;
+  }
+
+  async function requestTranslation(text, targetLang) {
+    const key = cacheKey(targetLang, text);
+    const cached = localStorage.getItem(key);
+    if (cached) {
+      return cached;
+    }
+
+    const url =
+      TRANSLATE_API +
+      '?q=' +
+      encodeURIComponent(text) +
+      '&langpair=' +
+      encodeURIComponent('zh-CN|' + targetLang);
+
+    const resp = await fetch(url, { method: 'GET' });
+    if (!resp.ok) {
+      throw new Error('translate http ' + resp.status);
+    }
+
+    const data = await resp.json();
+    const translated =
+      (data && data.responseData && data.responseData.translatedText) ||
+      (data && data.matches && data.matches[0] && data.matches[0].translation) ||
+      '';
+
+    if (!translated) {
+      throw new Error('empty translation');
+    }
+
+    localStorage.setItem(key, translated);
+    return translated;
+  }
+
+  async function translatePostText(lang) {
+    if (!DYNAMIC_TARGETS[lang]) {
+      restoreOriginalText();
+      return;
+    }
+
+    const targetLang = DYNAMIC_TARGETS[lang];
+    const nodes = getTranslatableNodes();
+    const capped = nodes.slice(0, 80);
+
+    for (const el of capped) {
+      const original = rememberOriginal(el);
+      if (!original) continue;
+
+      // Keep requests stable and fast by skipping extra long text blocks.
+      if (original.length > 350) continue;
+
+      try {
+        const translated = await requestTranslation(original, targetLang);
+        if (translated) {
+          el.textContent = translated;
+        }
+      } catch (error) {
+        // Ignore single node translation failures and continue.
+      }
+    }
+  }
+
   function translateUi(lang) {
     BINDINGS.forEach((item) => {
       const dict = UI_TEXT[item.key] || {};
@@ -71,6 +175,9 @@
     localStorage.setItem(LANG_STORAGE, lang);
     document.documentElement.setAttribute('data-ui-lang', lang);
     translateUi(lang);
+
+    // Translate post/article text dynamically with non-Google service.
+    translatePostText(lang);
   }
 
   function mountLangSwitcher() {
