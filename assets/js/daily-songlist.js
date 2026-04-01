@@ -115,8 +115,19 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        // 使用原生 scrollIntoView 让高亮歌词在窗口中心显示
-        next.scrollIntoView({ behavior: 'auto', block: 'center' });
+        // 步骤1：计算让歌词在面板中心的滚动距离
+        const itemTop = next.offsetTop;
+        const itemHeight = next.offsetHeight;
+        const panelHeight = lrcPanel.clientHeight;
+        const panelScrollTop = itemTop - (panelHeight - itemHeight) / 2;
+        
+        // 步骤2：设置面板滚动
+        lrcPanel.scrollTop = Math.max(0, Math.min(panelScrollTop, lrcPanel.scrollHeight - panelHeight));
+        
+        // 步骤3：让元素在浏览器窗口中心显示
+        const rect = next.getBoundingClientRect();
+        const offset = rect.top + window.scrollY - (window.innerHeight / 2) + (itemHeight / 2);
+        window.scrollTo({ top: offset, behavior: 'auto' });
       }
     }
 
