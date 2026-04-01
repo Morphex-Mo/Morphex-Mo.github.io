@@ -1,0 +1,63 @@
+<!-- 歌词播放器组件 -->
+<div id="lyrics-player-widget" class="lyrics-widget">
+  <!-- 歌曲选择器 -->
+  <div class="lyrics-selector">
+    <button class="lyrics-btn active" data-song="plazma" data-lrc="/assets/lyrics/plazma.lrc">
+      Plazma
+    </button>
+    <button class="lyrics-btn" data-song="spiral" data-lrc="/assets/lyrics/spiral.lrc">
+      Spiral
+    </button>
+  </div>
+
+  <!-- 音频播放器 -->
+  <div id="lyrics-player">
+    <audio id="lyrics-audio" controls>
+      <source src="" type="audio/mpeg">
+      您的浏览器不支持音频播放器
+    </audio>
+  </div>
+
+  <!-- 歌词容器 -->
+  <div id="lyrics-container"></div>
+</div>
+
+<!-- 加载样式表 -->
+<link rel="stylesheet" href="{{ '/assets/css/lyrics-scroller.css' | relative_url }}">
+
+<!-- 加载脚本 -->
+<script src="{{ '/assets/js/lyrics-scroller.js' | relative_url }}"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 初始化歌词滚动器
+    const scroller = new LyricsScroller({
+      container: '#lyrics-container',
+      audioElement: '#lyrics-audio',
+      lrcFile: '/assets/lyrics/plazma.lrc'
+    });
+
+    // 处理歌曲选择
+    document.querySelectorAll('.lyrics-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // 移除其他按钮的活跃状态
+        document.querySelectorAll('.lyrics-btn').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        // 添加当前按钮的活跃状态
+        this.classList.add('active');
+
+        // 加载新的歌词和音频
+        const lrcFile = this.dataset.lrc;
+        const song = this.dataset.song;
+        
+        scroller.setLRC(lrcFile);
+        
+        // 如果你有对应的音频文件，可以这样设置
+        // const audio = document.querySelector('#lyrics-audio');
+        // audio.src = `/assets/audio/${song}.mp3`;
+      });
+    });
+  });
+</script>
