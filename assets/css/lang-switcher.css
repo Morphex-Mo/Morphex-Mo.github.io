@@ -52,18 +52,6 @@
   background: var(--sidebar-hover-bg, rgba(120, 120, 120, 0.12));
 }
 
-.goog-te-banner-frame,
-.goog-te-balloon-frame,
-#goog-gt-tt,
-.goog-tooltip,
-.skiptranslate {
-  display: none !important;
-}
-
-body {
-  top: 0 !important;
-}
-
 @media (max-width: 768px) {
   #lang-switcher {
     right: 0.75rem;
