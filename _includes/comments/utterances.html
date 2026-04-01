@@ -1,0 +1,137 @@
+<!-- https://utteranc.es/ -->
+<script>
+  (function () {
+    const origin = 'https://utteranc.es';
+    const themeMapper = Theme.getThemeMapper('github-light', 'github-dark');
+    const initTheme = themeMapper[Theme.visualState];
+
+    function normalizePath(path) {
+      if (!path) return '/';
+      return path.length > 1 ? path.replace(/\/+$/, '') : path;
+    }
+
+    function ensureStatNodes() {
+      const metaRight = document.querySelector('.post-meta .d-flex.justify-content-between > div');
+      if (!metaRight) {
+        return null;
+      }
+
+      let viewsNode = document.getElementById('local-pageviews');
+      let commentsNode = document.getElementById('utterances-comments-count');
+
+      if (!viewsNode) {
+        const viewsWrap = document.createElement('span');
+        viewsWrap.className = 'me-2';
+        viewsWrap.innerHTML = '<i class="fa-regular fa-eye"></i> <em id="local-pageviews">0</em> 浏览';
+        metaRight.prepend(viewsWrap);
+        viewsNode = viewsWrap.querySelector('#local-pageviews');
+      }
+
+      if (!commentsNode) {
+        const commentsWrap = document.createElement('span');
+        commentsWrap.className = 'me-2';
+        commentsWrap.innerHTML = '<i class="fa-regular fa-comments"></i> <em id="utterances-comments-count">-</em> 评论';
+        metaRight.prepend(commentsWrap);
+        commentsNode = commentsWrap.querySelector('#utterances-comments-count');
+      }
+
+      return { viewsNode, commentsNode };
+    }
+
+    function updateLocalViews(viewsNode) {
+      if (!viewsNode) {
+        return;
+      }
+
+      try {
+        const key = 'post:views:' + normalizePath(window.location.pathname);
+        const oldVal = Number.parseInt(localStorage.getItem(key) || '0', 10);
+        const nextVal = Number.isNaN(oldVal) ? 1 : oldVal + 1;
+        localStorage.setItem(key, String(nextVal));
+        viewsNode.textContent = String(nextVal);
+      } catch (error) {
+        viewsNode.textContent = '-';
+      }
+    }
+
+    async function updateCommentCount(commentsNode) {
+      if (!commentsNode) {
+        return;
+      }
+
+      const repo = '{{ site.comments.utterances.repo }}';
+      const parts = repo.split('/');
+      if (parts.length !== 2) {
+        commentsNode.textContent = '-';
+        return;
+      }
+
+      const owner = parts[0];
+      const repoName = parts[1];
+      const postPath = normalizePath(window.location.pathname);
+
+      commentsNode.textContent = '...';
+
+      try {
+        const url = 'https://api.github.com/repos/' + owner + '/' + repoName + '/issues?labels=comment&state=all&per_page=100';
+        const response = await fetch(url, {
+          headers: {
+            Accept: 'application/vnd.github+json'
+          }
+        });
+
+        if (!response.ok) {
+          commentsNode.textContent = '-';
+          return;
+        }
+
+        const issues = await response.json();
+        const target = issues.find((issue) => {
+          const title = normalizePath(decodeURIComponent(issue.title || ''));
+          return title === postPath || title === postPath + '/';
+        });
+
+        commentsNode.textContent = target ? String(target.comments || 0) : '0';
+      } catch (error) {
+        commentsNode.textContent = '-';
+      }
+    }
+
+    const statNodes = ensureStatNodes();
+    if (statNodes) {
+      updateLocalViews(statNodes.viewsNode);
+      updateCommentCount(statNodes.commentsNode);
+    }
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', '{{ site.comments.utterances.repo }}');
+    script.setAttribute('issue-term', '{{ site.comments.utterances.issue_term }}');
+    script.setAttribute('theme', initTheme);
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.insertAdjacentElement('beforebegin', script);
+    }
+
+    addEventListener('message', (event) => {
+      let newTheme;
+
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        newTheme = themeMapper[Theme.visualState];
+
+        const message = {
+          type: 'set-theme',
+          theme: newTheme
+        };
+
+        const utterancesFrame = document.querySelector('.utterances-frame');
+        if (utterancesFrame && utterancesFrame.contentWindow) {
+          utterancesFrame.contentWindow.postMessage(message, origin);
+        }
+      }
+    });
+  })();
+</script>
