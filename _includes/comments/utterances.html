@@ -33,52 +33,105 @@
         return null;
       }
 
-      let viewsNode = document.getElementById('local-pageviews');
+      let viewsNode = document.getElementById('online-pageviews');
+      let visitorsNode = document.getElementById('online-site-uv');
+      let commentersNode = document.getElementById('utterances-commenters-count');
       let commentsNode = document.getElementById('utterances-comments-count');
 
       if (!viewsNode) {
         const viewsWrap = document.createElement('span');
         viewsWrap.className = 'me-2';
-        viewsWrap.innerHTML = '<i class="fa-regular fa-eye"></i> <em id="local-pageviews">0</em> 浏览';
-        metaRight.prepend(viewsWrap);
-        viewsNode = viewsWrap.querySelector('#local-pageviews');
+        viewsWrap.innerHTML = '<i class="fa-regular fa-eye"></i> <em id="online-pageviews">-</em> 浏览';
+        metaRight.appendChild(viewsWrap);
+        viewsNode = viewsWrap.querySelector('#online-pageviews');
+      }
+
+      if (!visitorsNode) {
+        const visitorsWrap = document.createElement('span');
+        visitorsWrap.className = 'me-2';
+        visitorsWrap.innerHTML = '<i class="fa-solid fa-users"></i> <em id="online-site-uv">-</em> 访客';
+        metaRight.appendChild(visitorsWrap);
+        visitorsNode = visitorsWrap.querySelector('#online-site-uv');
+      }
+
+      if (!commentersNode) {
+        const commentersWrap = document.createElement('span');
+        commentersWrap.className = 'me-2';
+        commentersWrap.innerHTML = '<i class="fa-regular fa-user"></i> <em id="utterances-commenters-count">-</em> 人评论过';
+        metaRight.appendChild(commentersWrap);
+        commentersNode = commentersWrap.querySelector('#utterances-commenters-count');
       }
 
       if (!commentsNode) {
         const commentsWrap = document.createElement('span');
         commentsWrap.className = 'me-2';
         commentsWrap.innerHTML = '<i class="fa-regular fa-comments"></i> <em id="utterances-comments-count">-</em> 评论';
-        metaRight.prepend(commentsWrap);
+        metaRight.appendChild(commentsWrap);
         commentsNode = commentsWrap.querySelector('#utterances-comments-count');
       }
 
-      return { viewsNode, commentsNode };
+      return { viewsNode, visitorsNode, commentersNode, commentsNode };
     }
 
-    function updateLocalViews(viewsNode) {
-      if (!viewsNode) {
-        return;
+    function ensureBusuanziBridge() {
+      if (!document.getElementById('busuanzi-value-page-pv')) {
+        const bridge = document.createElement('div');
+        bridge.id = 'busuanzi-bridge';
+        bridge.style.display = 'none';
+        bridge.innerHTML =
+          '<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>' +
+          '<span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv"></span></span>';
+        document.body.appendChild(bridge);
       }
 
-      try {
-        const key = 'post:views:' + normalizePath(window.location.pathname);
-        const oldVal = Number.parseInt(localStorage.getItem(key) || '0', 10);
-        const nextVal = Number.isNaN(oldVal) ? 1 : oldVal + 1;
-        localStorage.setItem(key, String(nextVal));
-        viewsNode.textContent = String(nextVal);
-      } catch (error) {
-        viewsNode.textContent = '-';
+      if (!document.querySelector('script[data-busuanzi]')) {
+        const busuanziScript = document.createElement('script');
+        busuanziScript.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+        busuanziScript.async = true;
+        busuanziScript.setAttribute('data-busuanzi', 'true');
+        document.head.appendChild(busuanziScript);
       }
     }
 
-    async function updateCommentCount(commentsNode) {
-      if (!commentsNode) {
-        return;
-      }
+    function updateOnlineViewStats(viewsNode, visitorsNode) {
+      if (!viewsNode || !visitorsNode) return;
+
+      ensureBusuanziBridge();
+
+      let tries = 0;
+      const maxTries = 30;
+      const timer = setInterval(() => {
+        tries += 1;
+
+        const pagePv = document.getElementById('busuanzi_value_page_pv');
+        const siteUv = document.getElementById('busuanzi_value_site_uv');
+
+        const pageVal = pagePv ? pagePv.textContent.trim() : '';
+        const uvVal = siteUv ? siteUv.textContent.trim() : '';
+
+        if (pageVal) {
+          viewsNode.textContent = pageVal;
+        }
+
+        if (uvVal) {
+          visitorsNode.textContent = uvVal;
+        }
+
+        if ((pageVal && uvVal) || tries >= maxTries) {
+          if (!pageVal) viewsNode.textContent = '-';
+          if (!uvVal) visitorsNode.textContent = '-';
+          clearInterval(timer);
+        }
+      }, 300);
+    }
+
+    async function updateCommentStats(commentersNode, commentsNode) {
+      if (!commentersNode || !commentsNode) return;
 
       const repo = '{{ site.comments.utterances.repo }}';
       const parts = repo.split('/');
       if (parts.length !== 2) {
+        commentersNode.textContent = '-';
         commentsNode.textContent = '-';
         return;
       }
@@ -97,6 +150,7 @@
         normalizeIssueTerm(window.location.origin + postPath)
       ]);
 
+      commentersNode.textContent = '...';
       commentsNode.textContent = '...';
 
       try {
@@ -108,6 +162,7 @@
         });
 
         if (!response.ok) {
+          commentersNode.textContent = '-';
           commentsNode.textContent = '-';
           return;
         }
@@ -118,16 +173,48 @@
           return pathCandidates.has(issueTerm);
         });
 
-        commentsNode.textContent = target ? String(target.comments || 0) : '0';
+        if (!target) {
+          commentersNode.textContent = '0';
+          commentsNode.textContent = '0';
+          return;
+        }
+
+        commentsNode.textContent = String(target.comments || 0);
+
+        if (!target.comments || !target.comments_url) {
+          commentersNode.textContent = '0';
+          return;
+        }
+
+        const commentsResp = await fetch(target.comments_url + '?per_page=100', {
+          headers: {
+            Accept: 'application/vnd.github+json'
+          }
+        });
+
+        if (!commentsResp.ok) {
+          commentersNode.textContent = '-';
+          return;
+        }
+
+        const comments = await commentsResp.json();
+        const users = new Set();
+        comments.forEach((c) => {
+          const login = c && c.user && c.user.login ? c.user.login : '';
+          if (login) users.add(login);
+        });
+
+        commentersNode.textContent = String(users.size);
       } catch (error) {
+        commentersNode.textContent = '-';
         commentsNode.textContent = '-';
       }
     }
 
     const statNodes = ensureStatNodes();
     if (statNodes) {
-      updateLocalViews(statNodes.viewsNode);
-      updateCommentCount(statNodes.commentsNode);
+      updateOnlineViewStats(statNodes.viewsNode, statNodes.visitorsNode);
+      updateCommentStats(statNodes.commentersNode, statNodes.commentsNode);
     }
 
     let script = document.createElement('script');
