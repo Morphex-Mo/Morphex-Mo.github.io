@@ -17,7 +17,6 @@
   let activeIndex = -1;
   let autoFollow = true;
   let lyricOffset = 0;
-  let smoothFollowOnce = false;
 
   function refreshControlText() {
     if (followToggle) {
@@ -107,31 +106,7 @@
       }
     }
 
-    if (idx < 0) return;
-
-    const behavior = smoothFollowOnce ? 'smooth' : 'auto';
-    smoothFollowOnce = false;
-
-    if (idx === activeIndex) {
-      if (autoFollow) {
-        const active = lrcPanel.querySelector('.lrc-item[data-idx="' + idx + '"]');
-        if (active) {
-          const panelTop = lrcPanel.scrollTop;
-          const panelBottom = panelTop + lrcPanel.clientHeight;
-          const activeTop = active.offsetTop;
-          const activeBottom = activeTop + active.offsetHeight;
-          const margin = 24;
-
-          if (activeTop < panelTop + margin || activeBottom > panelBottom - margin) {
-            const targetTop = activeTop - lrcPanel.clientHeight / 2 + active.offsetHeight / 2;
-            const maxTop = Math.max(0, lrcPanel.scrollHeight - lrcPanel.clientHeight);
-            const clampedTop = Math.max(0, Math.min(maxTop, targetTop));
-            lrcPanel.scrollTo({ top: clampedTop, behavior });
-          }
-        }
-      }
-      return;
-    }
+    if (idx === activeIndex || idx < 0) return;
 
     const prev = lrcPanel.querySelector('.lrc-item.active');
     if (prev) prev.classList.remove('active');
@@ -145,7 +120,7 @@
         const targetTop = nextTop - lrcPanel.clientHeight / 2 + nextHeight / 2;
         const maxTop = Math.max(0, lrcPanel.scrollHeight - lrcPanel.clientHeight);
         const clampedTop = Math.max(0, Math.min(maxTop, targetTop));
-        lrcPanel.scrollTo({ top: clampedTop, behavior });
+        lrcPanel.scrollTo({ top: clampedTop, behavior: 'smooth' });
       }
     }
 
@@ -197,7 +172,6 @@
   });
 
   player.addEventListener('seeked', function () {
-    smoothFollowOnce = true;
     updateActiveLyric(player.currentTime);
   });
 
@@ -214,7 +188,6 @@
       if (!Number.isFinite(step)) return;
       lyricOffset = Math.max(-3, Math.min(3, Number((lyricOffset + step).toFixed(1))));
       refreshControlText();
-      smoothFollowOnce = true;
       updateActiveLyric(player.currentTime);
     });
   });
@@ -223,7 +196,6 @@
     offsetReset.addEventListener('click', function () {
       lyricOffset = 0;
       refreshControlText();
-      smoothFollowOnce = true;
       updateActiveLyric(player.currentTime);
     });
   }
