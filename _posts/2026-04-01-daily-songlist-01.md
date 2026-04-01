@@ -13,7 +13,7 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
   <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-    <button class="song-play" data-src="/assets/media/plazma.mp3" data-title="Plazma" type="button" aria-label="播放 Plazma" title="播放">▶</button>
+    <button class="song-play" data-src="/assets/media/plazma.mp3" data-title="Plazma" type="button">开始</button>
     <span>Plazma</span>
   </li>
 </ul>
@@ -64,7 +64,6 @@ tags: [日推歌单, 动漫音乐, ACG]
   #lrc-panel {
     max-height: 420px;
     overflow-y: auto;
-    overscroll-behavior: contain;
     border: 1px solid var(--main-border-color);
     border-radius: 12px;
     padding: 10px 8px;
