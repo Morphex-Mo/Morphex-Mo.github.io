@@ -119,6 +119,13 @@
         const progress = lyricBlocks.length > 1 ? idx / (lyricBlocks.length - 1) : 0;
         const targetTop = maxTop * progress;
         lrcPanel.scrollTo({ top: targetTop, behavior: 'auto' });
+
+        // 同步页面滚动条：让活跃歌词在屏幕中心
+        const rect = next.getBoundingClientRect();
+        const elementCenterY = rect.top + rect.height / 2;
+        const viewportCenterY = window.innerHeight / 2;
+        const scrollOffset = elementCenterY - viewportCenterY;
+        window.scrollBy({ top: scrollOffset, behavior: 'auto' });
       }
     }
 
