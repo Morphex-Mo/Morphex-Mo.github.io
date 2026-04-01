@@ -1,13 +1,15 @@
-/* 歌词滚动容器 */
+/* 歌词滚动容器 - 独立滚动，不影响页面 */
 #lyrics-container {
-  max-height: 400px;
-  overflow-y: auto;
+  height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 20px;
   background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(150, 100, 255, 0.1));
   border-radius: 12px;
   border: 1px solid rgba(100, 200, 255, 0.3);
   font-family: 'Source Sans Pro', sans-serif;
-  scroll-behavior: smooth;
+  /* 防止滚动事件冒泡 */
+  overscroll-behavior: contain;
 }
 
 /* 歌词行样式 */

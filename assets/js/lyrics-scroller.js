@@ -19,6 +19,14 @@ class LyricsScroller {
       audio.addEventListener('timeupdate', () => this.updateLyrics());
       audio.addEventListener('play', () => this.updateLyrics());
     }
+
+    // 防止容器内的滚动冒泡到页面
+    const container = document.querySelector(this.container);
+    if (container) {
+      container.addEventListener('wheel', (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+    }
   }
 
   // 解析 LRC 格式：[mm:ss.xxx]歌词文本
@@ -127,10 +135,10 @@ class LyricsScroller {
             // 计算滚动位置，使当前行居中
             const targetScroll = lineTop - (containerHeight / 2) + (lineHeight / 2);
             
-            // 使用平滑滚动
-            container.scrollTo({
-              top: targetScroll,
-              behavior: 'smooth'
+            // 立即更新滚动位置（不使用smooth以避免多次触发scrollTo）
+            // requestAnimationFrame 确保在DOM更新后执行
+            requestAnimationFrame(() => {
+              container.scrollTop = targetScroll;
             });
           }
         }
