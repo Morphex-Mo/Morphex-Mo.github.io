@@ -115,22 +115,19 @@
     if (next) {
       next.classList.add('active');
       if (autoFollow) {
-        // 先获取页面位置（改变任何滚动前）
-        const rect = next.getBoundingClientRect();
-        const elementCenterY = rect.top + rect.height / 2;
-        const screenCenterY = window.innerHeight / 2;
-        const pageScrollAdjust = window.scrollY + (elementCenterY - screenCenterY);
-
-        // 计算面板内部滚动
+        // 第一步：让面板内部滚动显示这条歌词
         const elementOffsetTop = next.offsetTop;
         const elementHeight = next.offsetHeight;
         const panelHeight = lrcPanel.clientHeight;
         const panelCenterScrollTop = elementOffsetTop - (panelHeight / 2) + (elementHeight / 2);
         const maxPanelScroll = lrcPanel.scrollHeight - panelHeight;
-        const safePanelScroll = Math.max(0, Math.min(panelCenterScrollTop, maxPanelScroll));
+        lrcPanel.scrollTop = Math.max(0, Math.min(panelCenterScrollTop, maxPanelScroll));
 
-        // 同时执行两个滚动：面板中心 + 页面中心
-        lrcPanel.scrollTop = safePanelScroll;
+        // 第二步：让整个页面滚动，把这个歌词送到屏幕中心
+        const rect = next.getBoundingClientRect();
+        const elementCenterY = rect.top + rect.height / 2;
+        const screenCenterY = window.innerHeight / 2;
+        const pageScrollAdjust = window.scrollY + (elementCenterY - screenCenterY);
         window.scrollTo({ top: pageScrollAdjust, behavior: 'auto' });
       }
     }
