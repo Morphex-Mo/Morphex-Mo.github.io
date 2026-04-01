@@ -27,11 +27,18 @@ class LyricsScroller {
     const lyrics = [];
 
     lines.forEach(line => {
-      const match = line.match(/\[(\d{2}):(\d{2})\.(\d{3})\](.*)/);
+      // 匹配时间戳，支持 [mm:ss.xxx] 或 [mm:ss.xx] 格式
+      const match = line.match(/\[(\d{1,2}):(\d{2})\.(\d{2,3})\](.*)/);
       if (match) {
         const minutes = parseInt(match[1]);
         const seconds = parseInt(match[2]);
-        const milliseconds = parseInt(match[3]);
+        let milliseconds = parseInt(match[3]);
+        
+        // 如果只有两位毫秒，补到三位
+        if (match[3].length === 2) {
+          milliseconds = milliseconds * 10;
+        }
+        
         const text = match[4].trim();
 
         const time = minutes * 60 + seconds + milliseconds / 1000;
@@ -76,11 +83,19 @@ class LyricsScroller {
     const currentTime = audio.currentTime;
     let nextIndex = -1;
 
-    // 找到当前应该高亮的歌词行
-    for (let i = this.lyrics.length - 1; i >= 0; i--) {
-      if (currentTime >= this.lyrics[i].time) {
-        nextIndex = i;
-        break;
+    // 找到当前应该高亮的歌词行 - 使用二分查找以提高性能
+    if (this.lyrics.length > 0) {
+      let left = 0;
+      let right = this.lyrics.length - 1;
+      
+      while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        if (this.lyrics[mid].time <= currentTime) {
+          nextIndex = mid;
+          left = mid + 1;
+        } else {
+          right = mid - 1;
+        }
       }
     }
 
@@ -101,11 +116,23 @@ class LyricsScroller {
         );
         if (currentLine) {
           currentLine.classList.add('active');
-          // 滚动到当前行
-          currentLine.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
+          
+          // 在容器内滚动到当前行
+          const container = document.querySelector(this.container);
+          if (container) {
+            const lineTop = currentLine.offsetTop;
+            const containerHeight = container.clientHeight;
+            const lineHeight = currentLine.offsetHeight;
+            
+            // 计算滚动位置，使当前行居中
+            const targetScroll = lineTop - (containerHeight / 2) + (lineHeight / 2);
+            
+            // 使用平滑滚动
+            container.scrollTo({
+              top: targetScroll,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }
