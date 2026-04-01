@@ -5,7 +5,11 @@ categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
 ---
 
-今天这期先放你给的主推曲，播放器支持点击“开始”立即播放。
+#完成推荐语
+
+今天想推荐的这首，是我私心很重的一曲。它有高达系作品一贯的辽阔感，也有米津玄师嗓音里那种克制而锋利的温度。前奏像夜空里缓慢推进的推进器，副歌却忽然把情绪抬到失重边缘，像人在漫长航道中，终于看见彼岸的灯。
+
+如果说很多歌是在讲相遇，那么这首更像是在讲“抵达”：哪怕相隔再远，也会穿过噪声、穿过黑暗、穿过各自沉默的轨道，去见想见的人。它不是喧哗的热血，而是带着金属光泽的温柔。
 
 ## 歌单
 
@@ -13,11 +17,6 @@ tags: [日推歌单, 动漫音乐, ACG]
   <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
     <button class="song-play" data-src="/assets/media/midnight-reflection.mp3" data-title="ミッドナイト・リフレクション" type="button">开始</button>
     <span>ミッドナイト・リフレクション</span>
-  </li>
-
-  <li style="display:flex; align-items:center; gap:12px; margin:10px 0; opacity:0.7;">
-    <button type="button" disabled>开始</button>
-    <span>第二首（待补充音频文件）</span>
   </li>
 </ul>
 
@@ -34,131 +33,171 @@ tags: [日推歌单, 动漫音乐, ACG]
   <p><a href="/assets/lyrics/midnight-reflection.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
-## 歌词（中日双语）
+## 歌词（中日双语 · 同步滚动）
 
-> 曲名：ミッドナイト・リフレクション
->
-> 词：+α/あるふぁきゅん。/水野あつ
->
-> 曲：水野あつ
+> 曲名：ミッドナイト・リフレクション  
+> 演唱：米津玄师  
+> 说明：歌词会随播放进度自动高亮并滚动，点击任意行可跳转到对应时间。
 
-我一直都明白
+<style>
+  #lrc-panel {
+    max-height: 420px;
+    overflow-y: auto;
+    border: 1px solid var(--main-border-color);
+    border-radius: 12px;
+    padding: 10px 8px;
+    background: var(--card-bg);
+    scroll-behavior: smooth;
+  }
 
-ずっと僕は分かってた
+  .lrc-item {
+    padding: 10px 12px;
+    margin: 4px 0;
+    border-radius: 10px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+  }
 
-一直都明白
+  .lrc-item.active {
+    opacity: 1;
+    background: var(--sidebar-hover-bg);
+    box-shadow: inset 0 0 0 1px var(--btn-border-color);
+  }
 
-分かってた
+  .lrc-line {
+    line-height: 1.7;
+  }
 
-即便悲伤的事情与日俱增
+  .lrc-line.sub {
+    color: var(--text-muted-color);
+    font-size: 0.95em;
+  }
+</style>
 
-悲しい事増えていく
-
-我们也要努力地生活下去
-
-僕らは日々を跨ぐの
-
-原原本本的自己
-
-ありのままの自分がね
-
-绽放着最耀眼的光芒
-
-一番輝いてるよ
-
-我时常陷入沉思之中
-
-考えてしまう
-
-把自己的心逼向了崩溃的境地
-
-心壊れていく
-
-明明不应该是这样的啊
-
-こんなはずじゃないの
-
-尽管现实和理想相距甚远
-
-理想には程遠いけど
-
-此时此刻 我也仍努力地活着
-
-今 生きている
-
-任谁都难免会失去
-
-失うことは誰にもあるよ
-
-一步一步前进的我们
-
-一つずつ進んでいく僕たちは
-
-逐渐随波逐流 逐渐天各一方
-
-流されていく 離れていく
-
-星光如此耀眼
-
-星空が眩しくて
-
-我下意识地移开了目光
-
-目を逸らした
-
-没关系 没关系
-
-大丈夫 大丈夫
-
-哪怕途中和人群走散也没关系
-
-途中で逸れて良い
-
-我不是孤独一人
-
-一人じゃ無い
-
-没关系 没关系
-
-大丈夫 大丈夫
-
-望着眼前熙来攘往的人群
-
-人混み 行き交う
-
-内心感到痛苦不已
-
-苦しくなる
-
-任谁都难免会失去
-
-失うことは誰にもあるよ
-
-一步一步前进的我们
-
-一つずつ進んでいく僕たちは
-
-逐渐随波逐流 逐渐天各一方
-
-流されていく 離れていく
-
-终有一日会化为灰烬
-
-いつかは灰になる
-
-身在此处
-
-この場所で
-
-长夜将尽
-
-夜が明ける
+<div id="lrc-panel">
+  <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
+</div>
 
 <script>
   (function () {
     const player = document.getElementById('daily-player');
     const now = document.getElementById('now-playing');
     const buttons = document.querySelectorAll('#daily-playlist .song-play');
+    const lrcPanel = document.getElementById('lrc-panel');
+    const lrcUrl = '/assets/lyrics/midnight-reflection.lrc';
+    let lyricBlocks = [];
+    let activeIndex = -1;
+
+    function parseLrc(raw) {
+      const rows = raw.split(/\r?\n/);
+      const lineRegex = /^\[(\d{2}):(\d{2}(?:\.\d{1,3})?)\](.*)$/;
+      const entries = [];
+
+      rows.forEach((row) => {
+        const match = row.match(lineRegex);
+        if (!match) return;
+
+        const minute = Number(match[1]);
+        const second = Number(match[2]);
+        const text = (match[3] || '').trim();
+        if (!text) return;
+
+        entries.push({
+          time: minute * 60 + second,
+          text
+        });
+      });
+
+      entries.sort((a, b) => a.time - b.time);
+
+      const grouped = [];
+      const mergeWindow = 0.08;
+
+      entries.forEach((item) => {
+        const last = grouped[grouped.length - 1];
+        if (last && Math.abs(item.time - last.time) <= mergeWindow) {
+          last.lines.push(item.text);
+        } else {
+          grouped.push({ time: item.time, lines: [item.text] });
+        }
+      });
+
+      return grouped;
+    }
+
+    function renderLyrics(blocks) {
+      if (!lrcPanel) return;
+
+      if (!blocks.length) {
+        lrcPanel.innerHTML = '<p style="margin: 8px 10px; color: var(--text-muted-color);">未解析到歌词内容</p>';
+        return;
+      }
+
+      const html = blocks
+        .map((block, i) => {
+          const lines = block.lines
+            .map((line, idx) => '<div class="lrc-line ' + (idx > 0 ? 'sub' : '') + '">' + line + '</div>')
+            .join('');
+          return '<div class="lrc-item" data-idx="' + i + '" data-time="' + block.time + '">' + lines + '</div>';
+        })
+        .join('');
+
+      lrcPanel.innerHTML = html;
+
+      lrcPanel.querySelectorAll('.lrc-item').forEach((item) => {
+        item.addEventListener('click', function () {
+          const t = Number(this.getAttribute('data-time') || '0');
+          if (player && Number.isFinite(t)) {
+            player.currentTime = t;
+            player.play().catch(() => {});
+          }
+        });
+      });
+    }
+
+    function updateActiveLyric(currentTime) {
+      if (!lyricBlocks.length || !lrcPanel) return;
+
+      let idx = -1;
+      for (let i = 0; i < lyricBlocks.length; i++) {
+        if (currentTime >= lyricBlocks[i].time) {
+          idx = i;
+        } else {
+          break;
+        }
+      }
+
+      if (idx === activeIndex || idx < 0) return;
+
+      const prev = lrcPanel.querySelector('.lrc-item.active');
+      if (prev) prev.classList.remove('active');
+
+      const next = lrcPanel.querySelector('.lrc-item[data-idx="' + idx + '"]');
+      if (next) {
+        next.classList.add('active');
+        next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+
+      activeIndex = idx;
+    }
+
+    async function loadLrc() {
+      if (!lrcPanel) return;
+
+      try {
+        const resp = await fetch(lrcUrl, { cache: 'no-store' });
+        if (!resp.ok) {
+          throw new Error('load failed');
+        }
+
+        const text = await resp.text();
+        lyricBlocks = parseLrc(text);
+        renderLyrics(lyricBlocks);
+      } catch (err) {
+        lrcPanel.innerHTML = '<p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载失败，请打开上方 LRC 文件查看</p>';
+      }
+    }
 
     buttons.forEach((btn) => {
       btn.addEventListener('click', async function () {
@@ -182,5 +221,17 @@ tags: [日推歌单, 动漫音乐, ACG]
         }
       });
     });
+
+    if (player) {
+      player.addEventListener('timeupdate', function () {
+        updateActiveLyric(player.currentTime);
+      });
+
+      player.addEventListener('seeked', function () {
+        updateActiveLyric(player.currentTime);
+      });
+    }
+
+    loadLrc();
   })();
 </script>

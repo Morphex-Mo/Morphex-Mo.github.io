@@ -49,64 +49,74 @@
     }
   };
 
+  const TARGET_SELECTORS = [
+    '#sidebar .nav-link span',
+    '#panel-wrapper .panel-heading',
+    '#access-lastmod a',
+    '.post-meta span',
+    '#skin-switcher .skin-btn',
+    '#skin-switcher .skin-toggle',
+    '#lang-switcher .lang-toggle'
+  ];
+
   function getCurrentLangKey() {
     const saved = localStorage.getItem(LANG_STORAGE);
     if (saved && MAPPING[saved]) return saved;
     return DEFAULT_LANG;
   }
 
-  function replaceTextNodeValue(node, from, to) {
-    const raw = node.nodeValue;
-    if (!raw) return;
-
-    const trimmed = raw.trim();
-    if (trimmed !== from) return;
-
-    const prefixLen = raw.indexOf(trimmed);
-    const suffixLen = raw.length - prefixLen - trimmed.length;
-    const prefix = raw.slice(0, prefixLen);
-    const suffix = raw.slice(raw.length - suffixLen);
-    node.nodeValue = prefix + to + suffix;
-  }
-
-  function translateDom(lang) {
+  function translateElementText(el, lang) {
     const dict = DICT[lang];
-    if (!dict) return;
+    if (!el) return;
 
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        const parent = node.parentElement;
-        if (!parent) return NodeFilter.FILTER_REJECT;
-
-        const tag = parent.tagName;
-        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE' || tag === 'TEXTAREA') {
-          return NodeFilter.FILTER_REJECT;
-        }
-
-        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    });
-
-    const nodes = [];
-    let currentNode;
-    while ((currentNode = walker.nextNode())) {
-      nodes.push(currentNode);
+    if (!el.dataset.i18nBase) {
+      el.dataset.i18nBase = (el.textContent || '').trim();
     }
 
-    Object.entries(dict).forEach(([from, to]) => {
-      nodes.forEach((node) => replaceTextNodeValue(node, from, to));
+    const base = el.dataset.i18nBase;
+    if (!base) return;
+
+    if (lang === 'zh') {
+      el.textContent = base;
+      return;
+    }
+
+    if (dict && dict[base]) {
+      el.textContent = dict[base];
+    }
+  }
+
+  function translateUi(lang) {
+    TARGET_SELECTORS.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((el) => translateElementText(el, lang));
     });
+
+    // Translate sidebar title hints if present.
+    const langToggle = document.querySelector('#lang-switcher .lang-toggle');
+    if (langToggle) {
+      const labels = { zh: 'A文', en: 'Lang', ja: '言語' };
+      langToggle.textContent = labels[lang] || labels.zh;
+    }
+
+    const skinToggle = document.querySelector('#skin-switcher .skin-toggle');
+    if (skinToggle) {
+      skinToggle.setAttribute('title', lang === 'en' ? 'Theme' : lang === 'ja' ? 'テーマ' : '切换皮肤');
+    }
+
+    document.documentElement.setAttribute('lang', MAPPING[lang] || MAPPING.zh);
   }
 
   function applyLang(key) {
     const lang = MAPPING[key] ? key : DEFAULT_LANG;
     localStorage.setItem(LANG_STORAGE, lang);
-    document.documentElement.setAttribute('lang', MAPPING[lang]);
     document.documentElement.setAttribute('data-ui-lang', lang);
-    if (lang !== 'zh') {
-      translateDom(lang);
-    }
+    translateUi(lang);
+  }
+
+  function openDeepL(lang) {
+    const to = lang === 'ja' ? 'ja' : lang === 'en' ? 'en' : 'zh';
+    const url = 'https://www.deepl.com/translator#zh/' + to + '/' + encodeURIComponent(window.location.href);
+    window.open(url, '_blank', 'noopener');
   }
 
   function mountLangSwitcher() {
@@ -122,6 +132,8 @@
       '<button type="button" class="lang-btn" data-lang="zh">中文</button>' +
       '<button type="button" class="lang-btn" data-lang="en">English</button>' +
       '<button type="button" class="lang-btn" data-lang="ja">日本語</button>' +
+      '<button type="button" class="lang-btn" data-lang="deepl-en">DeepL 英文</button>' +
+      '<button type="button" class="lang-btn" data-lang="deepl-ja">DeepL 日文</button>' +
       '</div>';
 
     document.body.appendChild(root);
@@ -146,7 +158,23 @@
       }
 
       const key = target.getAttribute('data-lang');
-      if (!key || !MAPPING[key]) {
+      if (!key) {
+        return;
+      }
+
+      if (key === 'deepl-en') {
+        openDeepL('en');
+        root.classList.remove('open');
+        return;
+      }
+
+      if (key === 'deepl-ja') {
+        openDeepL('ja');
+        root.classList.remove('open');
+        return;
+      }
+
+      if (!MAPPING[key]) {
         return;
       }
 
@@ -162,15 +190,10 @@
       }
     });
 
-    // Re-apply translation for dynamically injected nodes.
-    const observer = new MutationObserver(function () {
-      const selected = getCurrentLangKey();
-      if (selected !== 'zh') {
-        translateDom(selected);
-      }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Re-apply once for delayed-rendered UI bits instead of continuous observation.
+    setTimeout(function () {
+      translateUi(getCurrentLangKey());
+    }, 600);
   }
 
   if (document.readyState === 'loading') {
