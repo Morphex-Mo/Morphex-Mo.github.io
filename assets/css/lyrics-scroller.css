@@ -1,4 +1,4 @@
-/* 歌词滚动容器 - 独立滚动，不影响页面 */
+/* 歌词滚动容器 - 独立滚动，完全隔离 */
 #lyrics-container {
   height: 400px;
   overflow-y: scroll;
@@ -8,12 +8,10 @@
   border-radius: 12px;
   border: 1px solid rgba(100, 200, 255, 0.3);
   font-family: 'Source Sans Pro', sans-serif;
-  /* 防止滚动事件冒泡 */
+  /* 阻止滚动冒泡 */
   overscroll-behavior: contain;
-  /* 禁用页面滚动时容器的过度滚动效果 */
-  -webkit-overflow-scrolling: touch;
-  /* 隔离这个元素的滚动效果 */
-  position: relative;
+  /* 禁用过度滚动弹簧效果 */
+  -webkit-overflow-scrolling: auto;
 }
 
 /* 歌词行样式 */
