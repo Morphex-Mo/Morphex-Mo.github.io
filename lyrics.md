@@ -3,6 +3,7 @@ layout: page
 icon: fas fa-music
 title: 歌词播放器
 permalink: /lyrics/
+comments: true
 ---
 
 <div class="lyrics-demo">
@@ -67,3 +68,9 @@ scroller.setLRC('/assets/lyrics/spiral.lrc');
 1. 将 LRC 文件放在 `/assets/lyrics/` 目录
 2. 在 `_includes/lyrics-player.html` 中添加按钮（可选）
 3. 对应的音频文件放在 `/assets/audio/` 目录（可选）
+
+## 评论区
+
+{% if site.comments.provider == 'utterances' and page.comments != false %}
+{% include comments/utterances.html %}
+{% endif %}

@@ -228,6 +228,9 @@
     const footer = document.querySelector('footer');
     if (footer) {
       footer.insertAdjacentElement('beforebegin', script);
+    } else {
+      // Fallback mount point for layouts where footer is not in DOM yet.
+      (document.body || document.documentElement).appendChild(script);
     }
 
     addEventListener('message', (event) => {
