@@ -6,6 +6,21 @@
 - type: twitter
   icon: "fa-brands fa-x-twitter"
 
+- type: bilibili
+  icon: "fa-brands fa-bilibili"
+  url: "https://space.bilibili.com/441329811"
+
+- type: qq
+  icon: "fa-brands fa-qq"
+  # Replace 123456789 with your QQ number.
+  # Option A (recommended): open QQ chat page.
+  url: "https://wpa.qq.com/msgrd?v=3&uin=2754999183&site=qq&menu=yes"
+
+
+- type: instagram
+  icon: "fa-brands fa-instagram"
+  url: "https://www.instagram.com/m0rphe1x/"
+
 - type: email
   icon: "fas fa-envelope"
   noblank: true # open link in current tab

@@ -2,8 +2,30 @@
 <script>
   (function () {
     const origin = 'https://utteranc.es';
-    const themeMapper = Theme.getThemeMapper('github-light', 'github-dark');
-    const initTheme = themeMapper[Theme.visualState];
+    const hasThemeApi =
+      typeof Theme !== 'undefined' &&
+      Theme &&
+      typeof Theme.getThemeMapper === 'function';
+
+    const themeMapper = hasThemeApi
+      ? Theme.getThemeMapper('github-light', 'github-dark')
+      : { light: 'github-light', dark: 'github-dark' };
+
+    function detectVisualState() {
+      if (hasThemeApi && Theme.visualState) {
+        return Theme.visualState;
+      }
+
+      const htmlMode = document.documentElement.getAttribute('data-mode');
+      if (htmlMode === 'dark') return 'dark';
+      if (htmlMode === 'light') return 'light';
+
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+
+    const initTheme = themeMapper[detectVisualState()] || 'github-light';
 
     function normalizePath(path) {
       if (!path) return '/';
@@ -236,8 +258,8 @@
     addEventListener('message', (event) => {
       let newTheme;
 
-      if (event.source === window && event.data && event.data.id === Theme.ID) {
-        newTheme = themeMapper[Theme.visualState];
+      if (hasThemeApi && event.source === window && event.data && event.data.id === Theme.ID) {
+        newTheme = themeMapper[detectVisualState()] || 'github-light';
 
         const message = {
           type: 'set-theme',
