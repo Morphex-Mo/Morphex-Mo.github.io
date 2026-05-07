@@ -1,36 +1,105 @@
-
 ---
-title: 日推歌单 Vol.15｜井芹仁菜、河原木桃香《空の箱》
+title: 日推歌单 Vol.15｜ミッドナイト・リフレクション
 date: 2026-04-14 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
 ---
 
-空の箱 — 一首在声线与编曲之间拉出空灵空间的作品。井芹仁菜与河原木桃香在声部的交叠里制造出既近又远的听感，鼓点与合成织体把情绪推向若隐若现的高潮，适合在黄昏或下雨天细细聆听。
+<!-- 依据 MAINTENANCE_DAILY_SONGLIST.md 规范，slug: midnight-reflection -->
 
-作品把目光放在日常与微小仪式感上：歌声像打开一只空盒子，里面是意念、回忆与未说出口的告白。第二段推荐里可以写到你与这首歌的个人联系，或它带来的画面感与想象。
+今天的日推是《ミッドナイト・リフレクション》。这首歌以夜色与霓虹为基调，合成器垫底与律动感强的低频把听者带入城市夜晚的静谧与喧哗并存的感觉。
+
+旋律有着淡淡的哀愁，但副歌处的和声让情绪得以释放，十分适合夜间独自回味的时刻。
+
+## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
 	<li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-		<button class="song-play" data-src="/assets/media/sora-no-hako.mp3" data-title="空の箱 — 井芹仁菜、河原木桃香" type="button" aria-label="播放 空の箱" title="播放">▶</button>
-		<span>空の箱 — 井芹仁菜、河原木桃香</span>
+		<button class="song-play" data-src="/assets/media/midnight-reflection.mp3" data-title="ミッドナイト・リフレクション" type="button" aria-label="播放 ミッドナイト・リフレクション" title="播放">▶</button>
+		<span>ミッドナイト・リフレクション</span>
 	</li>
 </ul>
 
 <div style="margin-top: 14px;">
 	<audio id="daily-player" controls preload="metadata" style="width:100%;">
-		<source src="/assets/media/sora-no-hako.mp3" type="audio/mpeg">
+		<source src="/assets/media/midnight-reflection.mp3" type="audio/mpeg">
 		你的浏览器不支持 audio 标签
 	</audio>
-	<p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: 空の箱 — 井芹仁菜、河原木桃香</p>
+	<p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: ミッドナイト・リフレクション</p>
 </div>
-
+ 
 <details style="margin-top:14px;">
 	<summary>查看歌词文件（LRC）</summary>
-	<p><a href="/assets/lyrics/sora-no-hako.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+	<p><a href="/assets/lyrics/midnight-reflection.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/sora-no-hako.lrc">
+## 歌词（同步滚动）
+
+> 曲名：ミッドナイト・リフレクション  
+> 演唱：—  
+> 作品：—  
+> 说明：歌词会随播放进度自动高亮并滚动，点击任意行可跳转到对应时间。
+
+<style>
+	#lrc-tools {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin: 8px 0 10px;
+	}
+
+	#lrc-tools button {
+		border: 1px solid var(--btn-border-color);
+		background: var(--button-bg);
+		color: var(--text-color);
+		border-radius: 8px;
+		padding: 4px 10px;
+		cursor: pointer;
+	}
+
+	#lrc-tools .offset-label {
+		color: var(--text-muted-color);
+		font-size: 0.92em;
+		padding: 0 2px;
+	}
+
+	#lrc-panel {
+		max-height: 420px;
+		overflow-y: auto;
+		border: 1px solid var(--main-border-color);
+		border-radius: 12px;
+		padding: 10px 14px 10px 8px;
+		background: var(--card-bg);
+		scroll-behavior: auto;
+		scrollbar-gutter: stable;
+	}
+
+	.lrc-item {
+		padding: 10px 12px;
+		margin: 4px 0;
+		border-radius: 10px;
+		opacity: 0.6;
+		transition: opacity 0.2s ease, background-color 0.2s ease;
+		cursor: pointer;
+	}
+
+	.lrc-item.active {
+		opacity: 1;
+		background: var(--sidebar-hover-bg);
+		box-shadow: inset 0 0 0 1px var(--btn-border-color);
+	}
+
+	.lrc-line {
+		line-height: 1.7;
+	}
+
+	.lrc-line.sub {
+		color: var(--text-muted-color);
+		font-size: 0.95em;
+	}
+</style>
+<div id="lrc-panel" data-lrc="/assets/lyrics/midnight-reflection.lrc">
 	<p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 
@@ -43,4 +112,3 @@ tags: [日推歌单, 动漫音乐, ACG]
 </div>
 
 <script defer src="/assets/js/daily-songlist.js"></script>
-

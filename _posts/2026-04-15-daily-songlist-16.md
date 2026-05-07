@@ -1,35 +1,105 @@
 ---
-title: 日推歌单 Vol.16｜ミッドナイト・リフレクション（如果我们相距很远…）
+title: 日推歌单 Vol.16｜井芹仁菜、河原木桃香《空の箱》
 date: 2026-04-15 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
 ---
 
-ミッドナイト・リフレクション（中文引述：“如果我们相距很远，那我会开着高达来见你”）是一首在夜色中反射出孤独却温柔光芒的作品。旋律简单却有层次，合成与吉他在副歌处推起温柔的浪潮，像是在城市窗外折射回来的记忆。
+<!-- 依据 MAINTENANCE_DAILY_SONGLIST.md 规范，slug: sora-no-hako -->
 
-这首歌适合在深夜独自回想时听，歌词和配器仿佛在对话：距离和行动之间，是不愿放弃的承诺。若你也有一段想要跨越距离去见人的回忆，把它放进今天的播放列表里。
+这一首的编曲以清亮的弦乐与现代电子鼓点为主，声线干净且富有层次，高潮处的和声处理带来宽广的情绪感。
+
+歌曲呈现出一种既怀旧又面向未来的氛围，歌词与旋律共同营造出一段关于成长与回忆的片段，很容易让我联想到夜晚窗前的独处时光。
+
+## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
 	<li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-		<button class="song-play" data-src="/assets/media/midnight-reflection.mp3" data-title="ミッドナイト・リフレクション" type="button" aria-label="播放 ミッドナイト・リフレクション" title="播放">▶</button>
-		<span>ミッドナイト・リフレクション（如果我们相距很远，那我会开着高达来见你）</span>
+		<button class="song-play" data-src="/assets/media/sora-no-hako.mp3" data-title="空の箱 — 井芹仁菜、河原木桃香" type="button" aria-label="播放 空の箱" title="播放">▶</button>
+		<span>空の箱 — 井芹仁菜、河原木桃香</span>
 	</li>
 </ul>
 
 <div style="margin-top: 14px;">
 	<audio id="daily-player" controls preload="metadata" style="width:100%;">
-		<source src="/assets/media/midnight-reflection.mp3" type="audio/mpeg">
+		<source src="/assets/media/sora-no-hako.mp3" type="audio/mpeg">
 		你的浏览器不支持 audio 标签
 	</audio>
-	<p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: ミッドナイト・リフレクション</p>
+	<p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: 空の箱 — 井芹仁菜、河原木桃香</p>
 </div>
-
+ 
 <details style="margin-top:14px;">
 	<summary>查看歌词文件（LRC）</summary>
-	<p><a href="/assets/lyrics/midnight-reflection.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+	<p><a href="/assets/lyrics/sora-no-hako.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/midnight-reflection.lrc">
+## 歌词（同步滚动）
+
+> 曲名：空の箱  
+> 演唱：井芹仁菜、河原木桃香  
+> 作品：—  
+> 说明：歌词会随播放进度自动高亮并滚动，点击任意行可跳转到对应时间。
+
+<style>
+	#lrc-tools {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin: 8px 0 10px;
+	}
+
+	#lrc-tools button {
+		border: 1px solid var(--btn-border-color);
+		background: var(--button-bg);
+		color: var(--text-color);
+		border-radius: 8px;
+		padding: 4px 10px;
+		cursor: pointer;
+	}
+
+	#lrc-tools .offset-label {
+		color: var(--text-muted-color);
+		font-size: 0.92em;
+		padding: 0 2px;
+	}
+
+	#lrc-panel {
+		max-height: 420px;
+		overflow-y: auto;
+		border: 1px solid var(--main-border-color);
+		border-radius: 12px;
+		padding: 10px 14px 10px 8px;
+		background: var(--card-bg);
+		scroll-behavior: auto;
+		scrollbar-gutter: stable;
+	}
+
+	.lrc-item {
+		padding: 10px 12px;
+		margin: 4px 0;
+		border-radius: 10px;
+		opacity: 0.6;
+		transition: opacity 0.2s ease, background-color 0.2s ease;
+		cursor: pointer;
+	}
+
+	.lrc-item.active {
+		opacity: 1;
+		background: var(--sidebar-hover-bg);
+		box-shadow: inset 0 0 0 1px var(--btn-border-color);
+	}
+
+	.lrc-line {
+		line-height: 1.7;
+	}
+
+	.lrc-line.sub {
+		color: var(--text-muted-color);
+		font-size: 0.95em;
+	}
+</style>
+<div id="lrc-panel" data-lrc="/assets/lyrics/sora-no-hako.lrc">
 	<p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 
@@ -42,4 +112,3 @@ tags: [日推歌单, 动漫音乐, ACG]
 </div>
 
 <script defer src="/assets/js/daily-songlist.js"></script>
-
