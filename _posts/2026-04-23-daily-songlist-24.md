@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.24｜待填
+title: 日推歌单 Vol.24｜《いつも何度でも》
 date: 2026-04-23 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
