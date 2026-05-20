@@ -28,7 +28,7 @@ tags: [日推歌单, 动漫音乐]
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="assets/lyrics/【majiko】まじ娘-アイロニ(反语)-CONTRAST【中日字幕】.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/【majiko】まじ娘-アイロニ(反语)-CONTRAST【中日字幕】.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）

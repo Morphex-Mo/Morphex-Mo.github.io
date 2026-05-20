@@ -28,7 +28,7 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="assets/media/OneLastKiss-宇多田光.mp3" type="audio/mpeg">
+        <source src="/assets/media/OneLastKiss-宇多田光.mp3" type="audio/mpeg">
         你的浏览器不支持 audio 标签
     </audio>
     <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: One Last Kiss — 宇多田光</p>
