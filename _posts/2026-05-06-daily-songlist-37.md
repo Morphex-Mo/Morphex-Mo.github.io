@@ -2,7 +2,7 @@
 title: 日推歌单 Vol.37｜はいよろこんで（乐意效劳） — KocchinoKento
 date: 2026-05-06 08:00:00 +0800
 categories: [Music]
-tags: [日推歌单, 动漫音乐, ACG]
+tags: [日推歌单, 动漫音乐]
 ---
 
 <!-- slug: haiyorokonde-kocchino-kento -->
