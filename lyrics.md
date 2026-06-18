@@ -69,8 +69,6 @@ scroller.setLRC('/assets/lyrics/spiral.lrc');
 2. 在 `_includes/lyrics-player.html` 中添加按钮（可选）
 3. 对应的音频文件放在 `/assets/audio/` 目录（可选）
 
-## 评论区
-
 {% if site.comments.provider == 'utterances' and page.comments != false %}
 {% include comments/utterances.html %}
 {% endif %}

@@ -1,25 +1,71 @@
 <!-- Stable comment + view stats block -->
-<section id="post-engagement" class="mt-4 mb-4 text-muted">
-  <span id="busuanzi_container_page_pv" class="me-3">
-    <i class="fa-regular fa-eye"></i>
-    <em id="busuanzi_value_page_pv">-</em>
-    浏览
-  </span>
-  <span id="busuanzi_container_site_uv" class="me-3">
-    <i class="fa-solid fa-users"></i>
-    <em id="busuanzi_value_site_uv">-</em>
-    访客
-  </span>
+<section class="post-comments" data-utterances-host hidden>
+  <div class="post-comments__header">
+    <h2 class="post-comments__title">
+      <i class="fa-regular fa-comments"></i>
+      <span>评论区</span>
+    </h2>
+
+    <div id="post-engagement" class="post-comments__stats text-muted">
+      <span id="busuanzi_container_page_pv">
+        <i class="fa-regular fa-eye"></i>
+        <em id="busuanzi_value_page_pv">-</em>
+        浏览
+      </span>
+      <span id="busuanzi_container_site_uv">
+        <i class="fa-solid fa-users"></i>
+        <em id="busuanzi_value_site_uv">-</em>
+        访客
+      </span>
+    </div>
+  </div>
+
+  <div class="post-comments__body">
+    <div class="post-comments__thread" aria-live="polite"></div>
+  </div>
 </section>
 
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  (function () {
+    const scriptAnchor = document.currentScript;
+    const host = scriptAnchor.previousElementSibling;
 
-<script
-  src="https://utteranc.es/client.js"
-  repo="{{ site.comments.utterances.repo }}"
-  issue-term="{{ site.comments.utterances.issue_term | default: 'pathname' }}"
-  label="{{ site.comments.utterances.label | default: 'comment' }}"
-  theme="{{ site.comments.utterances.theme | default: 'github-dark' }}"
-  crossorigin="anonymous"
-  async
-></script>
+    if (!host || !host.matches('[data-utterances-host]')) {
+      return;
+    }
+
+    const footer = document.querySelector('#tail-wrapper footer');
+    const isInline = host.closest('main, #tail-wrapper');
+
+    if (!isInline && footer) {
+      footer.insertAdjacentElement('beforebegin', host);
+    }
+
+    host.hidden = false;
+
+    if (!document.getElementById('busuanzi-script')) {
+      const busuanzi = document.createElement('script');
+      busuanzi.id = 'busuanzi-script';
+      busuanzi.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+      busuanzi.async = true;
+      document.body.appendChild(busuanzi);
+    }
+
+    const thread = host.querySelector('.post-comments__thread');
+
+    if (!thread || thread.querySelector('.utterances, .utterances-frame, script')) {
+      return;
+    }
+
+    const utterances = document.createElement('script');
+    utterances.src = 'https://utteranc.es/client.js';
+    utterances.setAttribute('repo', '{{ site.comments.utterances.repo }}');
+    utterances.setAttribute('issue-term', '{{ site.comments.utterances.issue_term | default: "pathname" }}');
+    utterances.setAttribute('label', '{{ site.comments.utterances.label | default: "comment" }}');
+    utterances.setAttribute('theme', '{{ site.comments.utterances.theme | default: "github-dark" }}');
+    utterances.crossOrigin = 'anonymous';
+    utterances.async = true;
+
+    thread.appendChild(utterances);
+  })();
+</script>
