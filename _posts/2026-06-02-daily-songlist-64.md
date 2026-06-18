@@ -2,7 +2,7 @@
 title: 日推歌单 Vol.64｜打上花火
 date: 2026-06-02 08:00:00 +0800
 categories: [Music]
-tags: [日推歌单, 动漫音乐, ACG]
+tags: [日推歌单, 动漫音乐, ACG, 米津玄师]
 ---
 
 <!-- slug: daily-songlist-64 -->

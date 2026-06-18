@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.73｜いってらっしゃい
+title: 日推歌单 Vol.73｜迷っちゃうわ
 date: 2026-06-11 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,28 +7,28 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <!-- slug: daily-songlist-73 -->
 
-今天推荐樋口爱《いってらっしゃい（路上小心）》。这首歌旋律温暖、声线亲切，适合清晨出门或需要一点治愈的小片刻，听着会有一种被鼓励的安心感。
+今天推荐 The Dance for Philosophy《迷っちゃうわ》（《我怎么可能成为你的恋人，不行不行！(※不是不可能！？)》ED）。这首歌带着轻快的 funk 和偶像流行感，旋律俏皮又有点摇摆，把恋爱里的犹豫、心动和自我拉扯唱得很可爱，听完心情会跟着亮起来。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
     <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-        <button class="song-play" data-src="/assets/media/HiguchiAi-Itterasshai.mp3" data-title="いってらっしゃい（樋口爱）" type="button" aria-label="播放 いってらっしゃい" title="播放">▶</button>
-        <span>いってらっしゃい（樋口爱）</span>
+        <button class="song-play" data-src="/assets/media/TheDanceForPhilosophy-Mayocchauwa.mp3" data-title="迷っちゃうわ（The Dance for Philosophy）" type="button" aria-label="播放 迷っちゃうわ" title="播放">▶</button>
+        <span>迷っちゃうわ（The Dance for Philosophy）</span>
     </li>
 </ul>
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="/assets/media/HiguchiAi-Itterasshai.mp3" type="audio/mpeg">
+        <source src="/assets/media/TheDanceForPhilosophy-Mayocchauwa.mp3" type="audio/mpeg">
         你的浏览器不支持 audio 标签
     </audio>
-    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: いってらっしゃい（樋口爱）</p>
+    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: 迷っちゃうわ（The Dance for Philosophy）</p>
 </div>
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="/assets/lyrics/HiguchiAi-Itterasshai.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/TheDanceForPhilosophy-Mayocchauwa.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）
@@ -47,7 +47,7 @@ tags: [日推歌单, 动漫音乐, ACG]
     .lrc-line.sub { color: var(--text-muted-color); font-size: 0.95em; }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/HiguchiAi-Itterasshai.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/TheDanceForPhilosophy-Mayocchauwa.lrc">
     <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 

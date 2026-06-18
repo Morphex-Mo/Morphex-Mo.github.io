@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.66｜いってらっしゃい
+title: 日推歌单 Vol.66｜かごめかごめ
 date: 2026-06-04 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,28 +7,28 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <!-- slug: daily-songlist-66 -->
 
-今天推荐樋口爱《いってらっしゃい（路上小心）》。这首歌旋律温暖、声线亲切，适合清晨出门或需要一点治愈的小片刻，听着会有一种被鼓励的安心感。
+今天推荐大石昌良《かごめかごめ》（《地缚少年花子君2》后篇片头曲）。这首歌把童谣般的神秘感和大石昌良招牌式的明快旋律揉在一起，轻快里带着一点诡谲，越听越能感到花子君那种可爱又危险的氛围。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
     <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-        <button class="song-play" data-src="/assets/media/HiguchiAi-Itterasshai.mp3" data-title="いってらっしゃい（樋口爱）" type="button" aria-label="播放 いってらっしゃい" title="播放">▶</button>
-        <span>いってらっしゃい（樋口爱）</span>
+        <button class="song-play" data-src="/assets/media/MasayoshiOishi-KagomeKagome.mp3" data-title="かごめかごめ（大石昌良）" type="button" aria-label="播放 かごめかごめ" title="播放">▶</button>
+        <span>かごめかごめ（大石昌良）</span>
     </li>
 </ul>
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="/assets/media/HiguchiAi-Itterasshai.mp3" type="audio/mpeg">
+        <source src="/assets/media/MasayoshiOishi-KagomeKagome.mp3" type="audio/mpeg">
         你的浏览器不支持 audio 标签
     </audio>
-    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: いってらっしゃい（樋口爱）</p>
+    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: かごめかごめ（大石昌良）</p>
 </div>
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="/assets/lyrics/HiguchiAi-Itterasshai.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/MasayoshiOishi-KagomeKagome.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）
@@ -47,7 +47,7 @@ tags: [日推歌单, 动漫音乐, ACG]
     .lrc-line.sub { color: var(--text-muted-color); font-size: 0.95em; }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/HiguchiAi-Itterasshai.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/MasayoshiOishi-KagomeKagome.lrc">
     <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 

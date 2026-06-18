@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.75｜いってらっしゃい
+title: 日推歌单 Vol.75｜ライラック
 date: 2026-06-13 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,28 +7,28 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <!-- slug: daily-songlist-75 -->
 
-今天推荐樋口爱《いってらっしゃい（路上小心）》。这首歌旋律温暖、声线亲切，适合清晨出门或需要一点治愈的小片刻，听着会有一种被鼓励的安心感。
+今天推荐 Mrs. GREEN APPLE《ライラック》（《失忆投捕》OP）。这首歌有很鲜明的青春疾走感，旋律明亮又带着一点酸涩，像把球场上的汗水、遗憾和重新站上投手丘的勇气都唱了出来；副歌一起来，整个人都会跟着向前。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
     <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-        <button class="song-play" data-src="/assets/media/HiguchiAi-Itterasshai.mp3" data-title="いってらっしゃい（樋口爱）" type="button" aria-label="播放 いってらっしゃい" title="播放">▶</button>
-        <span>いってらっしゃい（樋口爱）</span>
+        <button class="song-play" data-src="/assets/media/MrsGreenApple-Lilac.mp3" data-title="ライラック（Mrs. GREEN APPLE）" type="button" aria-label="播放 ライラック" title="播放">▶</button>
+        <span>ライラック（Mrs. GREEN APPLE）</span>
     </li>
 </ul>
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="/assets/media/HiguchiAi-Itterasshai.mp3" type="audio/mpeg">
+        <source src="/assets/media/MrsGreenApple-Lilac.mp3" type="audio/mpeg">
         你的浏览器不支持 audio 标签
     </audio>
-    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: いってらっしゃい（樋口爱）</p>
+    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: ライラック（Mrs. GREEN APPLE）</p>
 </div>
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="/assets/lyrics/HiguchiAi-Itterasshai.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/MrsGreenApple-Lilac.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）
@@ -47,7 +47,7 @@ tags: [日推歌单, 动漫音乐, ACG]
     .lrc-line.sub { color: var(--text-muted-color); font-size: 0.95em; }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/HiguchiAi-Itterasshai.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/MrsGreenApple-Lilac.lrc">
     <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 
