@@ -6,9 +6,17 @@ platforms:
     icon: "fa-brands fa-square-x-twitter"
     link: "https://twitter.com/intent/tweet?text=TITLE&url=URL"
 
-  - type: Facebook
-    icon: "fab fa-facebook-square"
-    link: "https://www.facebook.com/sharer/sharer.php?title=TITLE&u=URL"
+  - type: Bilibili
+    icon: "fa-brands fa-bilibili"
+    link: "https://t.bilibili.com/?tab=8&content=TITLE%20URL"
+
+  - type: WeChat
+    icon: "fa-brands fa-weixin"
+    link: "https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=12&data=URL"
+
+  - type: QQ
+    icon: "fa-brands fa-qq"
+    link: "https://connect.qq.com/widget/shareqq/index.html?url=URL&title=TITLE"
 
   - type: Telegram
     icon: "fab fa-telegram"

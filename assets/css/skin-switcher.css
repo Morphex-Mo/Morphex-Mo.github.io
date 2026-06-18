@@ -6,6 +6,10 @@
 }
 
 #skin-switcher .skin-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
@@ -14,6 +18,16 @@
   color: var(--text-color, #222222);
   box-shadow: var(--card-shadow, 0 4px 12px rgba(0, 0, 0, 0.15));
   cursor: pointer;
+}
+
+#skin-switcher .skin-toggle .fa-circle-half-stroke {
+  font-size: 0.95rem;
+}
+
+#skin-switcher .skin-toggle .fa-palette {
+  margin-left: -0.18rem;
+  font-size: 0.68rem;
+  transform: translateY(0.25rem);
 }
 
 #skin-switcher .skin-panel {
@@ -75,4 +89,44 @@ html[data-user-skin='sepia'] {
     right: 0.75rem;
     bottom: 7rem;
   }
+}
+
+#search #skin-switcher {
+  position: absolute;
+  top: 50%;
+  right: 0.45rem;
+  bottom: auto;
+  z-index: 30;
+  transform: translateY(-50%);
+}
+
+#search #skin-switcher .skin-toggle {
+  width: 2rem;
+  height: 1.8rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-muted-color, #868e96);
+}
+
+#search #skin-switcher .skin-toggle:hover,
+#search #skin-switcher.open .skin-toggle {
+  color: var(--link-color, #6ea8fe);
+  background: rgba(128, 128, 128, 0.14);
+}
+
+#search #skin-switcher .skin-toggle .fa-circle-half-stroke {
+  font-size: 0.9rem;
+}
+
+#search #skin-switcher .skin-toggle .fa-palette {
+  font-size: 0.62rem;
+}
+
+#search #skin-switcher .skin-panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  margin-top: 0;
+  border-radius: 8px;
 }

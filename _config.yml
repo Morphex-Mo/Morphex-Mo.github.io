@@ -6,7 +6,7 @@ lang: zh                               # 中文界面，更适合你的博客内
 timezone: Asia/Hong_Kong               # 香港时区（当前你在 HK，完美匹配）
 
 title: Morphex's Blog
-tagline: Code & Technology
+tagline: Coding and Sharing
 description: >-
   Morphex 的技术博客 | 分享编程、开发经验、机器学习与学习笔记 | CS @ SUSTech
 

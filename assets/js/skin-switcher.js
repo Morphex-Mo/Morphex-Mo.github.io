@@ -62,10 +62,14 @@
       return;
     }
 
+    const search = document.getElementById('search');
     const root = document.createElement('div');
     root.id = 'skin-switcher';
     root.innerHTML =
-      '<button type="button" class="skin-toggle" aria-label="切换皮肤">🎨</button>' +
+      '<button type="button" class="skin-toggle" aria-label="切换皮肤" title="切换皮肤">' +
+      '<i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>' +
+      '<i class="fa-solid fa-palette" aria-hidden="true"></i>' +
+      '</button>' +
       '<div class="skin-panel" aria-label="皮肤面板">' +
       '<button type="button" class="skin-btn" data-action="light">日光（白色）</button>' +
       '<button type="button" class="skin-btn" data-action="dark">夜晚（黑色）</button>' +
@@ -73,12 +77,13 @@
       '<button type="button" class="skin-btn" data-action="auto">跟随系统</button>' +
       '</div>';
 
-    document.body.appendChild(root);
+    (search || document.body).appendChild(root);
 
     const toggle = root.querySelector('.skin-toggle');
     const panel = root.querySelector('.skin-panel');
 
     toggle.addEventListener('click', function () {
+      document.getElementById('lang-switcher')?.classList.remove('open');
       root.classList.toggle('open');
     });
 

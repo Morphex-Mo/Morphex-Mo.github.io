@@ -18,7 +18,7 @@
     skin_dark: { zh: '夜晚（黑色）', en: 'Night (Dark)', ja: '夜（ダーク）' },
     skin_sepia: { zh: '暖棕（护眼）', en: 'Sepia (Eye Comfort)', ja: 'セピア（目に優しい）' },
     skin_auto: { zh: '跟随系统', en: 'Follow System', ja: 'システムに従う' },
-    lang_toggle: { zh: 'A文', en: 'Lang', ja: '言語' },
+    lang_toggle: { zh: 'A文', en: 'A文', ja: 'A文' },
     view_label: { zh: '浏览', en: 'Views', ja: '閲覧' },
     comment_label: { zh: '评论', en: 'Comments', ja: 'コメント' },
     play_label: { zh: '开始', en: 'Play', ja: '再生' }
@@ -185,22 +185,24 @@
       return;
     }
 
+    const search = document.getElementById('search');
     const root = document.createElement('div');
     root.id = 'lang-switcher';
     root.innerHTML =
-      '<button type="button" class="lang-toggle" aria-label="切换语言">A文</button>' +
+      '<button type="button" class="lang-toggle" aria-label="切换语言" title="切换语言">A文</button>' +
       '<div class="lang-panel" aria-label="语言面板">' +
       '<button type="button" class="lang-btn" data-lang="zh">中文</button>' +
       '<button type="button" class="lang-btn" data-lang="en">English</button>' +
       '<button type="button" class="lang-btn" data-lang="ja">日本語</button>' +
       '</div>';
 
-    document.body.appendChild(root);
+    (search || document.body).appendChild(root);
 
     const toggle = root.querySelector('.lang-toggle');
     const panel = root.querySelector('.lang-panel');
 
     toggle.addEventListener('click', function () {
+      document.getElementById('skin-switcher')?.classList.remove('open');
       root.classList.toggle('open');
     });
 
