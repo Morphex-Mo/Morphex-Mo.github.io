@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.132｜心臓を捧げよ！
+title: 日推歌单 Vol.132｜STYX HELIX
 date: 2026-08-09 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,28 +7,28 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <!-- slug: daily-songlist-132 -->
 
-今天推荐 Linked Horizon《心臓を捧げよ！》。这首歌几乎是《进击的巨人》里最能把誓言唱成战鼓的一首，合唱、弦乐和 Revo 标志性的进行感一步步把情绪推高；每一句“献出心脏”都像把恐惧压下去之后，对自由重新举起的旗。
+今天推荐 MYTH & ROID《STYX HELIX》（《Re:从零开始的异世界生活》ED）。这首歌有一种冷色的循环感，像时间一次次重来后残留的疲惫和希望；副歌并不喧闹，却能把心口慢慢收紧。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
     <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-        <button class="song-play" data-src="/assets/media/LinkedHorizon-ShinzouWoSasageyo.mp3" data-title="心臓を捧げよ！（Linked Horizon）" type="button" aria-label="播放 心臓を捧げよ！" title="播放">▶</button>
-        <span>心臓を捧げよ！（Linked Horizon）</span>
+        <button class="song-play" data-src="/assets/media/MythRoid-StyxHelix.mp4" data-title="STYX HELIX（MYTH &amp; ROID）" type="button" aria-label="播放 STYX HELIX" title="播放">▶</button>
+        <span>STYX HELIX（MYTH &amp; ROID）</span>
     </li>
 </ul>
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="/assets/media/LinkedHorizon-ShinzouWoSasageyo.mp3" type="audio/mpeg">
+        <source src="/assets/media/MythRoid-StyxHelix.mp4" type="audio/mp4">
         你的浏览器不支持 audio 标签
     </audio>
-    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: 心臓を捧げよ！（Linked Horizon）</p>
+    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: STYX HELIX（MYTH &amp; ROID）</p>
 </div>
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="/assets/lyrics/LinkedHorizon-ShinzouWoSasageyo.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/MythRoid-StyxHelix.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）
@@ -47,7 +47,7 @@ tags: [日推歌单, 动漫音乐, ACG]
     .lrc-line.sub { color: var(--text-muted-color); font-size: 0.95em; }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/LinkedHorizon-ShinzouWoSasageyo.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/MythRoid-StyxHelix.lrc">
     <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 

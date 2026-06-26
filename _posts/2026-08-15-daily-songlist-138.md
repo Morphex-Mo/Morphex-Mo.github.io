@@ -1,5 +1,5 @@
 ---
-title: 日推歌单 Vol.138｜心臓を捧げよ！
+title: 日推歌单 Vol.138｜デート・ア・ライブ
 date: 2026-08-15 08:00:00 +0800
 categories: [Music]
 tags: [日推歌单, 动漫音乐, ACG]
@@ -7,28 +7,28 @@ tags: [日推歌单, 动漫音乐, ACG]
 
 <!-- slug: daily-songlist-138 -->
 
-今天推荐 Linked Horizon《心臓を捧げよ！》。这首歌几乎是《进击的巨人》里最能把誓言唱成战鼓的一首，合唱、弦乐和 Revo 标志性的进行感一步步把情绪推高；每一句“献出心脏”都像把恐惧压下去之后，对自由重新举起的旗。
+今天推荐 sweet ARMS《デート・ア・ライブ》（《约会大作战》OP）。这首歌把战斗、恋爱和命运选择感混得很有动画开场的气势，节奏推进很快；听着会想起那句“约会，然后拯救世界”。
 
 ## 歌单
 
 <ul id="daily-playlist" style="list-style:none; padding-left:0; margin:0;">
     <li style="display:flex; align-items:center; gap:12px; margin:10px 0;">
-        <button class="song-play" data-src="/assets/media/LinkedHorizon-ShinzouWoSasageyo.mp3" data-title="心臓を捧げよ！（Linked Horizon）" type="button" aria-label="播放 心臓を捧げよ！" title="播放">▶</button>
-        <span>心臓を捧げよ！（Linked Horizon）</span>
+        <button class="song-play" data-src="/assets/media/SweetArms-DateALive.mp3" data-title="デート・ア・ライブ（sweet ARMS）" type="button" aria-label="播放 デート・ア・ライブ" title="播放">▶</button>
+        <span>デート・ア・ライブ（sweet ARMS）</span>
     </li>
 </ul>
 
 <div style="margin-top: 14px;">
     <audio id="daily-player" controls preload="metadata" style="width:100%;">
-        <source src="/assets/media/LinkedHorizon-ShinzouWoSasageyo.mp3" type="audio/mpeg">
+        <source src="/assets/media/SweetArms-DateALive.mp3" type="audio/mpeg">
         你的浏览器不支持 audio 标签
     </audio>
-    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: 心臓を捧げよ！（Linked Horizon）</p>
+    <p id="now-playing" style="margin:8px 0 0; color:#9aa0a6;">Now Playing: デート・ア・ライブ（sweet ARMS）</p>
 </div>
 
 <details style="margin-top:14px;">
     <summary>查看歌词文件（LRC）</summary>
-    <p><a href="/assets/lyrics/LinkedHorizon-ShinzouWoSasageyo.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
+    <p><a href="/assets/lyrics/SweetArms-DateALive.lrc" target="_blank" rel="noopener">打开 LRC 歌词</a></p>
 </details>
 
 ## 歌词（同步滚动）
@@ -47,7 +47,7 @@ tags: [日推歌单, 动漫音乐, ACG]
     .lrc-line.sub { color: var(--text-muted-color); font-size: 0.95em; }
 </style>
 
-<div id="lrc-panel" data-lrc="/assets/lyrics/LinkedHorizon-ShinzouWoSasageyo.lrc">
+<div id="lrc-panel" data-lrc="/assets/lyrics/SweetArms-DateALive.lrc">
     <p style="margin: 8px 10px; color: var(--text-muted-color);">歌词加载中...</p>
 </div>
 
