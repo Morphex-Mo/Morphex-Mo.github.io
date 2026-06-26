@@ -1,6 +1,5 @@
 ---
 title: About Me | Morphex
-date: 2026-06-27 10:00:00 +0800
 pin: true
 toc: false
 comments: false
